@@ -8,7 +8,7 @@
   programs.home-manager.enable = true;
 
   imports = [ 
-    ./user/app/git/git.nix
+    ../../user/app/git/git.nix
   ];
 
   # This value determines the Home Manager release that your configuration is

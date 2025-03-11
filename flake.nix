@@ -9,6 +9,9 @@
 
   outputs = { self, nixpkgs, home-manager, ... }:
     let
+      systemSettings = {
+        profile = "personal";
+      };
       userSettings = rec {
         username = "brianl";
         name = "Brian Lucas";
@@ -22,7 +25,7 @@
         brianl = home-manager.lib.homeManagerConfiguration {
 	  inherit pkgs;
 	  modules = [ 
-	    ./home.nix 
+	    ./profiles/${systemSettings.profile}/home.nix
 	  ];
 	  extraSpecialArgs = {
 	    inherit userSettings;
