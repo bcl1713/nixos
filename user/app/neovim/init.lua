@@ -1,1 +1,2 @@
-print ("Hello World")
+require "options"
+require "plugins"
