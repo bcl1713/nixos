@@ -1,7 +1,6 @@
 { config, pkgs, userSettings, ... }:
 
 {
-  home.packages = [ pkgs.neovim ];
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -10,5 +9,17 @@
     withNodeJs = true;
     withPython3 = true;
     withRuby = true;
+  };
+
+  programs.ripgrep.enable = true;
+
+  ## Add check for wayland vs x11.  Setting x11 for now.
+  home.packages = with pkgs; [
+    xclip
+  ];
+
+  home.file."${config.xdg.configHome}/nvim" = {
+    source = ./.;
+    recursive = true;
   };
 }
