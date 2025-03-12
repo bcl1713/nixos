@@ -2,7 +2,7 @@ return {
 
     "neovim/nvim-lspconfig",
 
-    'folke/neodev.nvim', -- new
+    'folke/neodev.nvim',
 
     {
         'hrsh7th/nvim-cmp',
@@ -10,9 +10,7 @@ return {
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'rafamadriz/friendly-snippets',
-            
             'hrsh7th/cmp-nvim-lsp',
-            
         },
     },
 
@@ -32,6 +30,11 @@ return {
                 theme = 'onedark',
             })
         end,
-    }
+    },
+
+		{
+			'echasnovski/mini.nvim',
+			version = false
+		},
 
 }
