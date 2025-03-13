@@ -5,9 +5,10 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+		hyperland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
       systemSettings = {
         profile = "personal";
@@ -35,6 +36,7 @@
       nixosConfigurations = {
         nixbook = lib.nixosSystem {
 	  inherit system;
+		specialArgs = { inherit inputs; };
 	  modules = [ ./profiles/${systemSettings.profile}/configuration.nix ];
         };
       };
