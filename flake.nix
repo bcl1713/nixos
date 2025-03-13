@@ -35,7 +35,7 @@
       nixosConfigurations = {
         nixbook = lib.nixosSystem {
 	  inherit system;
-	  modules = [ ./profiles/personal/configuration.nix ];
+	  modules = [ ./profiles/${systemSettings.profile}/configuration.nix ];
         };
       };
     };
