@@ -12,6 +12,7 @@
     ../../user/app/neovim/neovim.nix
 		../../user/app/firefox/firefox.nix
 		../../user/app/nextcloud/nextcloud.nix
+		../../user/app/kitty/kitty.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
