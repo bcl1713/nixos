@@ -8,6 +8,7 @@
   programs.home-manager.enable = true;
 
   imports = [ 
+	  ../../modules/wm/hyprland.nix
     ../../user/app/git/git.nix
     ../../user/app/neovim/neovim.nix
 		../../user/app/firefox/firefox.nix
