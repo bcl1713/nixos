@@ -1,3 +1,5 @@
+# profiles/personal/home.nix
+
 { config, pkgs, userSettings, ... }:
 
 {

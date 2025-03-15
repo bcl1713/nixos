@@ -1,3 +1,5 @@
+# user/app/git/git.nix
+
 { config, pkgs, userSettings, ... }:
 
 {

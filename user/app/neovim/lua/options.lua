@@ -1,3 +1,5 @@
+-- user/app/neovim/lua/options.lua
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 

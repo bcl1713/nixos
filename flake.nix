@@ -1,3 +1,5 @@
+# flake.nix
+
 {
   description = "My Flake";
 

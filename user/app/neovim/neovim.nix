@@ -1,3 +1,5 @@
+# user/app/neovim/neovim.nix
+
 { config, pkgs, userSettings, ... }:
 
 {

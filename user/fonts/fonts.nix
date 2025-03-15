@@ -1,3 +1,5 @@
+# usr/fonts/fonts.nix
+
 {
   pkgs,
 	...

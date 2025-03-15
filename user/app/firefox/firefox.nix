@@ -1,3 +1,5 @@
+# usr/app/firefox/firefox.nix
+
 { config, pkgs, ... }:
 
 {
