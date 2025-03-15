@@ -1,6 +1,6 @@
 # user/wm/default.nix
 
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [

@@ -15,7 +15,7 @@
       systemSettings = {
         profile = "personal";
       };
-      userSettings = rec {
+      userSettings = {
         username = "brianl";
         name = "Brian Lucas";
         email = "bcl1713@gmail.com";
@@ -26,21 +26,21 @@
     in {
       homeConfigurations = {
         brianl = home-manager.lib.homeManagerConfiguration {
-	  inherit pkgs;
-	  modules = [ 
-	    ./profiles/${systemSettings.profile}/home.nix
-	  ];
-	  extraSpecialArgs = {
-	    inherit userSettings;
-	  };
-	};
-      };
-      nixosConfigurations = {
-        nixbook = lib.nixosSystem {
-	  inherit system;
-		specialArgs = { inherit inputs; };
-	  modules = [ ./profiles/${systemSettings.profile}/configuration.nix ];
+	        inherit pkgs;
+	        modules = [ 
+	          ./profiles/${systemSettings.profile}/home.nix
+	        ];
+	        extraSpecialArgs = {
+	          inherit userSettings;
+	        };
         };
       };
+    nixosConfigurations = {
+      nixbook = lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules = [ ./profiles/${systemSettings.profile}/configuration.nix ];
+      };
     };
+  };
 }

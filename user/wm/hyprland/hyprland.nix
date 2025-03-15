@@ -26,7 +26,7 @@
     source = ./.;
   };
 
-	home.file."${config.xdg.configHome}/waybar" = {
-	  source = ./waybar;
-	};
+  home.file."${config.xdg.configHome}/waybar" = {
+    source = ./waybar;
+  };
 }

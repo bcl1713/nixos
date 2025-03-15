@@ -4,7 +4,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports =
@@ -50,15 +50,15 @@
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
-	xdg.portal = {
+  xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-	
-	programs.hyprland = {
-	  enable = true;
-		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-	};
+
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -93,9 +93,6 @@
     isNormalUser = true;
     description = "Brian Lucas";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
   };
 
   # Allow unfree packages
@@ -108,12 +105,12 @@
     wget
     git
     zsh
-		nautilus
+    nautilus
   ];
 
   fonts.packages = with pkgs; [
-	  nerd-fonts.fira-code
-	];
+    nerd-fonts.fira-code
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

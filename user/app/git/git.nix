@@ -1,6 +1,6 @@
 # user/app/git/git.nix
 
-{ config, pkgs, userSettings, ... }:
+{ pkgs, userSettings, ... }:
 
 {
   home.packages = [ pkgs.git ];
