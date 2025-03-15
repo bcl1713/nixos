@@ -16,6 +16,7 @@
 		../../user/app/nextcloud/nextcloud.nix
 		../../user/app/kitty/kitty.nix
 		../../user/fonts/fonts.nix
+		../../user/wm
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -68,7 +69,7 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      ll = "ls =l";
+      ll = "ls -al";
     };
   };
 
