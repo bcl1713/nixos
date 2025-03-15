@@ -13,6 +13,7 @@
 		../../user/app/firefox/firefox.nix
 		../../user/app/nextcloud/nextcloud.nix
 		../../user/app/kitty/kitty.nix
+		../../user/fonts/fonts.nix
   ];
 
   # This value determines the Home Manager release that your configuration is

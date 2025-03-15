@@ -104,7 +104,14 @@
     git
     zsh
 		wofi
+		waybar
+		hyprpaper
+		font-awesome
   ];
+
+  fonts.packages = with pkgs; [
+	  nerd-fonts.fira-code
+	];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
