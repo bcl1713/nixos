@@ -39,6 +39,10 @@
       nss = "sudo nixos-rebuild switch --flake ~/.dotfiles/";
       hms = "home-manager switch --flake ~/.dotfiles/";
     };
+    oh-my-zsh = {
+      enable = true;
+      theme = "agnoster";
+    };
   };
 
 }
