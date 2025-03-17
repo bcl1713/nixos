@@ -93,6 +93,7 @@
     isNormalUser = true;
     description = "Brian Lucas";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
   };
 
   # Allow unfree packages
@@ -104,9 +105,10 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
-    zsh
     nautilus
   ];
+
+  programs.zsh.enable = true;
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code

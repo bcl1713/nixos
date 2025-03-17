@@ -36,6 +36,8 @@
     enable = true;
     shellAliases = {
       ll = "ls -al";
+      nss = "sudo nixos-rebuild switch --flake ~/.dotfiles/";
+      hms = "home-manager switch --flake ~/.dotfiles/";
     };
   };
 
