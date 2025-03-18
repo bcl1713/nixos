@@ -23,7 +23,8 @@
         # language servers
         lua-language-server
         nil
-        nixd
+        nixd  # Adding nixd for improved Nix LSP support
+        nodePackages.yaml-language-server  # For YAML files including Home Assistant
 
         # clipboard support
         xclip
