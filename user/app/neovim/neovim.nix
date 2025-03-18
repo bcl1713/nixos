@@ -23,6 +23,7 @@
         # language servers
         lua-language-server
         nil
+        nixd
 
         # clipboard support
         xclip
@@ -32,11 +33,12 @@
       plugins = with pkgs.vimPlugins; [
 
         # LSP
+        # neodev must be loaded before lspconfig
+        neodev-nvim
         {
           plugin = nvim-lspconfig;
           config = toLuaFile ./nvim/plugin/lsp.lua;
         }
-        neodev-nvim
 
         # Completion
         nvim-cmp 
@@ -53,6 +55,12 @@
         {
           plugin = telescope-nvim;
           config = toLuaFile ./nvim/plugin/telescope.lua;
+        }
+        
+        # Adding oil.nvim for file navigation
+        {
+          plugin = oil-nvim;
+          config = toLuaFile ./nvim/plugin/oil.lua;
         }
 
         # Utility
