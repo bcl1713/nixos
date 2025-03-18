@@ -65,7 +65,7 @@ require('lspconfig').lua_ls.setup {
         version = 'LuaJIT',
       },
       diagnostics = {
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         library = vim.api.nvim_get_runtime_file("", true),
@@ -83,7 +83,7 @@ require('lspconfig').nil_ls.setup {
   autostart = true,
   capabilities = capabilities,
   on_attach = on_attach,
-  cmd = {"nil"},
+  cmd = { "nil" },
   settings = {
     ['nil'] = {
       formatting = {
@@ -113,16 +113,19 @@ require('lspconfig').yamlls.setup {
   on_attach = on_attach,
   settings = {
     yaml = {
+      customTags = {
+        "!include",
+        "!include_dir_list",
+        "!include_dir_named",
+        "!include_dir_merge_list",
+        "!include_dir_merge_named",
+        "!secret",
+        "!env_var",
+        "!input",
+        "!lambda",
+        "!extend",
+      },
       schemas = {
-        -- Home Assistant schemas
-        ["https://raw.githubusercontent.com/home-assistant/core/dev/homeassistant/generated/frontend/build/integrations.json"] = {
-          "**/*home-assistant*/*.yaml",
-          "**/configuration.yaml",
-          "**/automations.yaml",
-          "**/scripts.yaml",
-          "**/scenes.yaml",
-          "**/*.ha.yaml"
-        },
         -- Add more YAML schemas as needed
         ["https://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
         ["https://json.schemastore.org/kustomization.json"] = "kustomization.{yml,yaml}",
