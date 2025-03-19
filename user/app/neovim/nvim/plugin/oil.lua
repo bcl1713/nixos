@@ -37,21 +37,21 @@ require("oil").setup({
   -- Set to `false` to remove a keymap
   -- See :help oil-actions for a list of all available actions
   keymaps = {
-    ["g?"] = "actions.show_help",
-    ["<CR>"] = "actions.select",
-    ["<C-s>"] = "actions.select_vsplit",
-    ["<C-h>"] = "actions.select_split",
-    ["<C-t>"] = "actions.select_tab",
-    ["<C-p>"] = "actions.preview",
-    ["<C-c>"] = "actions.close",
-    ["<C-l>"] = "actions.refresh",
-    ["-"] = "actions.parent",
-    ["_"] = "actions.open_cwd",
-    ["`"] = "actions.cd",
-    ["~"] = "actions.tcd",
-    ["gs"] = "actions.change_sort",
-    ["gx"] = "actions.open_external",
-    ["g."] = "actions.toggle_hidden",
+    ["g?"] = { "actions.show_help", desc = "Show help" },
+    ["<CR>"] = { "actions.select", desc = "Open file/directory" },
+    ["<C-s>"] = { "actions.select_vsplit", desc = "Open in vertical split" },
+    ["<C-h>"] = { "actions.select_split", desc = "Open in horizontal split" },
+    ["<C-t>"] = { "actions.select_tab", desc = "Open in new tab" },
+    ["<C-p>"] = { "actions.preview", desc = "Preview file" },
+    ["<C-c>"] = { "actions.close", desc = "Close oil" },
+    ["<C-l>"] = { "actions.refresh", desc = "Refresh" },
+    ["-"] = { "actions.parent", desc = "Go to parent directory" },
+    ["_"] = { "actions.open_cwd", desc = "Open current working directory" },
+    ["`"] = { "actions.cd", desc = "Change directory" },
+    ["~"] = { "actions.tcd", desc = "Change directory (tab local)" },
+    ["gs"] = { "actions.change_sort", desc = "Change sort order" },
+    ["gx"] = { "actions.open_external", desc = "Open in external program" },
+    ["g."] = { "actions.toggle_hidden", desc = "Toggle hidden files" },
   },
   -- Set to false to disable all of the above keymaps
   use_default_keymaps = true,
@@ -128,5 +128,6 @@ require("oil").setup({
   },
 })
 
--- Set up a keymap for quickly opening oil
+-- Set up standardized keymaps for Oil file explorer
 vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Open file explorer" })

@@ -17,6 +17,10 @@ require("zen-mode").setup {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    vim.keymap.set('n', '<leader>mz', ':ZenMode<CR>', { buffer = true, silent = true })
+    vim.keymap.set('n', '<leader>mz', ':ZenMode<CR>', {
+      buffer = true,
+      silent = true,
+      desc = "Toggle Zen mode"
+    })
   end
 })

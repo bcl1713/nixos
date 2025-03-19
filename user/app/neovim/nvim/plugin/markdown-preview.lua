@@ -12,6 +12,9 @@ vim.g.mkdp_page_title = '「${name}」'
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    vim.keymap.set('n', '<leader>mp', '<Plug>MarkdownPreviewToggle', { buffer = true })
+    vim.keymap.set('n', '<leader>mp', '<Plug>MarkdownPreviewToggle', {
+      buffer = true,
+      desc = "Toggle Markdown preview"
+    })
   end
 })
