@@ -266,6 +266,7 @@ in
     wl-clipboard
     grim
     slurp
+    networkmanagerapplet
   ];
 
   # Configuration files
