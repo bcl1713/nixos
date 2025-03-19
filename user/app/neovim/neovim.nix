@@ -85,6 +85,11 @@
 
         vim-nix
 
+        {
+          plugin = catppuccin-nvim;
+          config = toLuaFile ./nvim/plugin/catppuccin.lua;
+        }
+
       ];
 
       extraLuaConfig = ''
