@@ -21,6 +21,8 @@ vim.o.termguicolors = true
 
 vim.o.mouse = 'a'
 
+vim.o.conceallevel = 2
+
 -- Global format options
 vim.o.formatoptions = 'tcqjrn1'
 
