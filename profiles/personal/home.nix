@@ -18,6 +18,7 @@
     ../../user/fonts/fonts.nix
     ../../user/wm
     ../../user/scripts/directory-combiner.nix
+    ../../user/scripts/wifi-menu.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
