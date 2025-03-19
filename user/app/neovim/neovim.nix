@@ -30,6 +30,9 @@
         # clipboard support
         xclip
         wl-clipboard
+
+        # cli tools
+        glow
       ];
 
       plugins = with pkgs.vimPlugins; [

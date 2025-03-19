@@ -149,5 +149,25 @@ require('lspconfig').yamlls.setup {
 -- Setup marksman for markdown files
 require('lspconfig').marksman.setup {
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+
+    local bufmap = function(keys, func)
+      vim.keymap.set('n', keys, func, { buffer = bufnr })
+    end
+
+    -- Preview
+    bufmap('<leader>mp', ':silent !glow %<CR>')
+
+    -- Toggle checkboxes
+    bufmap('<leader>x', function()
+      local line = vim.api.nvim_get_current_line()
+      if line:match('%[%s%]') then
+        line = line:gsub('%[%s%]', '[x]')
+      elseif line:match('%[x%]') then
+        line = line:gsub('%[x%]', '[ ]')
+      end
+      vim.api.nvim_set_current_line(line)
+    end)
+  end,
 }
