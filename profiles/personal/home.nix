@@ -17,6 +17,7 @@
     ../../user/app/kitty/kitty.nix
     ../../user/fonts/fonts.nix
     ../../user/wm
+    ../../user/scripts/directory-combiner.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -44,5 +45,7 @@
       theme = "agnoster";
     };
   };
+
+  programs.directory-combiner.enable = true;
 
 }
