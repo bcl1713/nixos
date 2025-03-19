@@ -4,10 +4,16 @@
 
 {
   home.packages = [ pkgs.git ];
-  programs.git.enable = true;
-  programs.git.userName = userSettings.name;
-  programs.git.userEmail = userSettings.email;
-  programs.git.extraConfig = {
-    init.defaultBranch = "main";
+  programs.git = {
+    enable = true;
+    userName = userSettings.name;
+    userEmail = userSettings.email;
+    extraConfig = {
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      rebase.autoStash = true;
+      core.editor = "nvim";
+      diff.colorMoved = "default";
+    };
   };
 }
