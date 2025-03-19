@@ -24,9 +24,49 @@ in
         
         set -euo pipefail
         
-        if [ $# -lt 1 ]; then
-          echo "Usage: combine-directory <directory> [output-file]"
+        # Default configuration
+        INCLUDE_HIDDEN=0
+        
+        # Function to show usage
+        show_usage() {
+          echo "Usage: combine-directory [OPTIONS] <directory> [output-file]"
+          echo "Options:"
+          echo "  -a, --all       Include hidden files and directories"
+          echo "  -h, --help      Show this help message"
+          echo ""
           echo "If output-file is not specified, output goes to stdout"
+        }
+        
+        # Parse command line arguments
+        POSITIONAL_ARGS=()
+        
+        while [[ $# -gt 0 ]]; do
+          case $1 in
+            -a|--all)
+              INCLUDE_HIDDEN=1
+              shift
+              ;;
+            -h|--help)
+              show_usage
+              exit 0
+              ;;
+            -*)
+              echo "Error: Unknown option: $1"
+              show_usage
+              exit 1
+              ;;
+            *)
+              POSITIONAL_ARGS+=("$1")
+              shift
+              ;;
+          esac
+        done
+        
+        # Restore positional parameters
+        set -- "''${POSITIONAL_ARGS[@]}"
+        
+        if [ $# -lt 1 ]; then
+          show_usage
           exit 1
         fi
         
@@ -45,7 +85,14 @@ in
           local rel_path="$2"
           
           # Get all files in the current directory
-          find "$dir" -maxdepth 1 -type f | sort | while read -r file; do
+          # Exclude hidden files unless INCLUDE_HIDDEN is set
+          if [ "$INCLUDE_HIDDEN" -eq 1 ]; then
+            find_files_cmd="find \"$dir\" -maxdepth 1 -type f"
+          else
+            find_files_cmd="find \"$dir\" -maxdepth 1 -type f -not -path \"*/\\.*\""
+          fi
+          
+          eval "$find_files_cmd" | sort | while read -r file; do
             filename=$(basename "$file")
             
             # Create the relative path for the header
@@ -58,20 +105,41 @@ in
             # Create a nice header for the file
             header="\n\n========================================\n"
             header+="FILE: $file_rel_path\n"
-            header+="========================================\n\n"
             
-            # Output the header and file content
-            if [ -n "$OUTPUT_FILE" ]; then
-              echo -e "$header" >> "$OUTPUT_FILE"
-              cat "$file" >> "$OUTPUT_FILE"
+            # Check if file is binary using the 'file' command
+            if file --mime "$file" | grep -q "charset=binary"; then
+              header+="[BINARY FILE - CONTENT EXCLUDED]\n"
+              header+="========================================\n\n"
+              
+              # Output just the header without the binary content
+              if [ -n "$OUTPUT_FILE" ]; then
+                echo -e "$header" >> "$OUTPUT_FILE"
+              else
+                echo -e "$header"
+              fi
             else
-              echo -e "$header"
-              cat "$file"
+              header+="========================================\n\n"
+              
+              # Output the header and file content for text files
+              if [ -n "$OUTPUT_FILE" ]; then
+                echo -e "$header" >> "$OUTPUT_FILE"
+                cat "$file" >> "$OUTPUT_FILE"
+              else
+                echo -e "$header"
+                cat "$file"
+              fi
             fi
           done
           
           # Process subdirectories recursively
-          find "$dir" -maxdepth 1 -type d -not -path "$dir" | sort | while read -r subdir; do
+          # Exclude hidden directories unless INCLUDE_HIDDEN is set
+          if [ "$INCLUDE_HIDDEN" -eq 1 ]; then
+            find_dirs_cmd="find \"$dir\" -maxdepth 1 -type d -not -path \"$dir\""
+          else
+            find_dirs_cmd="find \"$dir\" -maxdepth 1 -type d -not -path \"$dir\" -not -path \"*/\\.*\""
+          fi
+          
+          eval "$find_dirs_cmd" | sort | while read -r subdir; do
             subdir_name=$(basename "$subdir")
             
             # Create new relative path for subdirectory
@@ -112,30 +180,49 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = [ 
+      cfg.package 
+      pkgs.file  # Add dependency on the 'file' command
+    ];
     
     # Create a simple wrapper with documentation
     home.file.".local/share/directory-combiner/README.md".text = ''
       # Directory Combiner
       
       A utility to recursively combine all files in a directory with headers showing relative paths.
+      Binary files are detected and listed, but their content is excluded.
       
       ## Usage
       
       ```
-      combine-directory <directory> [output-file]
+      combine-directory [OPTIONS] <directory> [output-file]
       ```
       
+      ### Options
+      
+      - `-a, --all` - Include hidden files and directories (those starting with a dot)
+      - `-h, --help` - Show help message
+      
+      ### Notes
+      
+      - By default, hidden files and directories are excluded
       - If no output file is specified, the combined content is printed to stdout
       - Each file is prefixed with a header showing its relative path from the root directory
       
-      ## Example
+      ## Examples
       
-      ```
+      ```bash
+      # Basic usage - exclude hidden files and directories
       combine-directory ~/projects/my-code combined-output.txt
+      
+      # Include hidden files and directories
+      combine-directory --all ~/projects/my-code combined-output.txt
+      
+      # Output to stdout instead of a file
+      combine-directory ~/projects/my-code | less
       ```
       
-      This will create a file `combined-output.txt` containing all files from `~/projects/my-code` 
+      This will create a file `combined-output.txt` containing all non-hidden files from `~/projects/my-code` 
       with headers showing their relative paths.
     '';
   };
