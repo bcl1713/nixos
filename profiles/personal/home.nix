@@ -35,6 +35,11 @@
     EDITOR = "nvim";
   };
 
+  home.packages = with pkgs; [
+    glow
+    nodePackages.markdownlint-cli2
+  ];
+
   programs.zsh = {
     enable = true;
     shellAliases = {

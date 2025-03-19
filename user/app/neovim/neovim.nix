@@ -30,9 +30,6 @@
         # clipboard support
         xclip
         wl-clipboard
-
-        # cli tools
-        glow
       ];
 
       plugins = with pkgs.vimPlugins; [
@@ -95,11 +92,34 @@
           plugin = catppuccin-nvim;
           config = toLuaFile ./nvim/plugin/catppuccin.lua;
         }
+        
+        # Markdown Stuffs
+        {
+          plugin = markdown-preview-nvim;
+          config = toLuaFile ./nvim/plugin/markdown-preview.lua;
+        }
+        {
+          plugin = vim-table-mode;
+          config = toLuaFile ./nvim/plugin/table-mode.lua;
+        }
+        {
+          plugin = headlines-nvim;
+          config = toLuaFile ./nvim/plugin/headlines.lua;
+        }
+        {
+          plugin = which-key-nvim;
+          config = toLuaFile ./nvim/plugin/which-key.lua;
+        }
+        {
+          plugin = zen-mode-nvim;
+          config = toLuaFile ./nvim/plugin/zen-mode.lua;
+        }
 
       ];
 
       extraLuaConfig = ''
         ${builtins.readFile ./nvim/options.lua}
+        ${builtins.readFile ./nvim/plugin/markdown-snippets.lua}
       '';
 
     };

@@ -156,9 +156,6 @@ require('lspconfig').marksman.setup {
       vim.keymap.set('n', keys, func, { buffer = bufnr })
     end
 
-    -- Preview
-    bufmap('<leader>mp', ':silent !glow %<CR>')
-
     -- Toggle checkboxes
     bufmap('<leader>x', function()
       local line = vim.api.nvim_get_current_line()
