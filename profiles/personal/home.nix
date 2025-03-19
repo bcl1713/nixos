@@ -15,6 +15,7 @@
     ../../user/app/firefox/firefox.nix
     ../../user/app/nextcloud/nextcloud.nix
     ../../user/app/kitty/kitty.nix
+    ../../user/app/prusa/prusa.nix
     ../../user/fonts/fonts.nix
     ../../user/wm
     ../../user/scripts/directory-combiner.nix
