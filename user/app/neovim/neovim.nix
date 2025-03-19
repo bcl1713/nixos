@@ -21,10 +21,11 @@
 
       extraPackages = with pkgs; [
         # language servers
-        lua-language-server
-        nil
-        nixd  # Adding nixd for improved Nix LSP support
-        nodePackages.yaml-language-server  # For YAML files including Home Assistant
+        lua-language-server # Lua
+        nil # Nix 
+        nixd  # Nix
+        nodePackages.yaml-language-server  # YAML
+        marksman # Markdown
 
         # clipboard support
         xclip

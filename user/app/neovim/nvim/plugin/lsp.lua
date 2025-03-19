@@ -145,3 +145,9 @@ require('lspconfig').yamlls.setup {
     },
   },
 }
+
+-- Setup marksman for markdown files
+require('lspconfig').marksman.setup {
+  capabilities = capabilities,
+  on_attach = on_attach
+}
