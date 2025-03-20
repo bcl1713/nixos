@@ -283,14 +283,9 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 4. Update the Neovim theme in `user/app/neovim/nvim/plugin/catppuccin.lua`
 5. Update the Mako notification theme in `user/wm/hyprland/hyprland.nix`
 
-## 🔄 Recent Improvements
+## 🔄 Recent Changes
 
-- Added automatic garbage collection to optimize disk usage
-- Implemented ZRam support for better memory management
-- Added Git integration for Neovim with gitsigns, fugitive, and diffview
-- Added automatic battery warnings with notifications
-- Added notification support via Mako with Catppuccin theme
-- Improved TLP power management with custom settings
+See the [CHANGELOG.md](./CHANGELOG.md) for a detailed list of recent changes and improvements.
 
 ## 📝 Todo / Future Improvements
 
@@ -313,4 +308,4 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](/LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details.

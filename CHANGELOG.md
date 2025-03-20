@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New git aliases and configuration options
 
 ### Changed
+- Updated README with a link to the CHANGELOG for better documentation navigation
 - Improved Neovim keymap organization with which-key integration
 - Updated README to reflect new features and improvements
 - Reorganized Hyprland autostart configuration
