@@ -1,4 +1,4 @@
-# Add to user/scripts/battery-warning.nix
+# user/scripts/battery-warning.nix
 { pkgs, ... }:
 
 {
@@ -6,13 +6,15 @@
     (writeShellScriptBin "battery-warning" ''
       #!/usr/bin/env bash
       
-      BATTERY_LEVEL=$(acpi -b | grep -P -o '[0-9]+(?=%)')
-      CHARGING_STATUS=$(acpi -b | grep -c "Charging")
+      BATTERY_LEVEL=$(${pkgs.acpi}/bin/acpi -b | grep -P -o '[0-9]+(?=%)')
+      CHARGING_STATUS=$(${pkgs.acpi}/bin/acpi -b | grep -c "Charging")
       
       if [ "$BATTERY_LEVEL" -le 15 ] && [ "$CHARGING_STATUS" -eq 0 ]; then
-        notify-send -u critical "Battery Low" "Battery level is $BATTERY_LEVEL%. Please connect charger."
+        ${pkgs.libnotify}/bin/notify-send -u critical "Battery Low" "Battery level is $BATTERY_LEVEL%. Please connect charger."
       fi
     '')
+    # Add acpi as a dependency so it's available in your system
+    acpi
   ];
 
   # Add a systemd timer to check battery periodically
@@ -35,7 +37,16 @@
     };
     Service = {
       Type = "oneshot";
-      ExecStart = "${pkgs.writeShellScriptBin "battery-warning" ''...''}/bin/battery-warning";
+      ExecStart = "${pkgs.writeShellScriptBin "battery-warning" ''
+        #!/usr/bin/env bash
+        
+        BATTERY_LEVEL=$(${pkgs.acpi}/bin/acpi -b | grep -P -o '[0-9]+(?=%)')
+        CHARGING_STATUS=$(${pkgs.acpi}/bin/acpi -b | grep -c "Charging")
+        
+        if [ "$BATTERY_LEVEL" -le 15 ] && [ "$CHARGING_STATUS" -eq 0 ]; then
+          ${pkgs.libnotify}/bin/notify-send -u critical "Battery Low" "Battery level is $BATTERY_LEVEL%. Please connect charger."
+        fi
+      ''}/bin/battery-warning";
     };
   };
 }
