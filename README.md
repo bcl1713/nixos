@@ -247,7 +247,7 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 
 - [ ] Add screenshots
 - [ ] Add screen sharing support
-- [ ] Implement automatic garbage collection
+- [x] Implement automatic garbage collection
 - [x] Improve Neovim keymap organization with which-key integration
 - [ ] Add Git integration for Neovim
 - [ ] Improve battery notifications
