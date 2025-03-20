@@ -120,6 +120,14 @@
           config = toLuaFile ./nvim/plugin/which-key.lua;
         }
 
+        # Git integration
+        {
+          plugin = gitsigns-nvim;
+          config = toLuaFile ./nvim/plugin/git.lua;
+        }
+        vim-fugitive
+        diffview-nvim
+        plenary-nvim
       ];
 
     };

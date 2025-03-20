@@ -25,6 +25,7 @@ This repository contains my personal NixOS configuration for a laptop setup runn
   - Oil.nvim for file navigation
   - Markdown tools (preview, tables, zen mode)
   - Which-key for discoverable keybindings
+  - Git integration with gitsigns, fugitive, and diffview
 - **Waybar** with custom styling and battery indicators
 - **Firefox** with enhanced privacy settings
 - **Kitty** terminal emulator with Catppuccin theme
@@ -129,6 +130,7 @@ The Neovim configuration includes:
 - Markdown-specific enhancements
 - Catppuccin color scheme
 - Custom keybindings
+- Git integration with gitsigns, fugitive, and diffview
 
 ## ⌨️ Keyboard Shortcuts
 
@@ -140,7 +142,7 @@ My Neovim configuration uses consistent keymap prefixes to organize commands:
 |-------------|----------------------------------------------------------|
 | `<leader>l` | LSP operations (rename, format, symbols, etc.)           |
 | `<leader>f` | File/Find operations (files, grep, buffers, etc.)        |
-| `<leader>g` | Git operations (commits, branches, status)               |
+| `<leader>g` | Git operations (stage, reset, diff, blame, etc.)         |
 | `<leader>m` | Markdown-specific operations (preview, tables, zen mode) |
 | `<leader>d` | Diagnostics operations                                   |
 | `<leader>b` | Buffer operations                                        |
@@ -191,6 +193,31 @@ My Neovim configuration uses consistent keymap prefixes to organize commands:
 | `<leader>mr` | Realign tables          |
 | `<leader>mz` | Toggle zen mode         |
 | `<leader>mx` | Toggle checkbox         |
+
+#### Git Operations
+
+| Shortcut         | Action                             |
+|------------------|-----------------------------------|
+| `<leader>gs`     | Stage hunk                        |
+| `<leader>gr`     | Reset hunk                        |
+| `<leader>gS`     | Stage buffer                      |
+| `<leader>gu`     | Undo stage hunk                   |
+| `<leader>gR`     | Reset buffer                      |
+| `<leader>gp`     | Preview hunk                      |
+| `<leader>gb`     | Blame line                        |
+| `<leader>gt`     | Toggle current line blame         |
+| `<leader>gd`     | Diff against index                |
+| `<leader>gD`     | Diff against previous commit      |
+| `<leader>gcc`    | Create commit                     |
+| `<leader>gca`    | Amend commit                      |
+| `<leader>gll`    | View git log                      |
+| `<leader>glf`    | View git log for current file     |
+| `<leader>glp`    | View git log with patches         |
+| `<leader>gvd`    | Open diffview                     |
+| `<leader>gvh`    | View file history                 |
+| `<leader>gvc`    | Close diffview                    |
+| `[c`             | Jump to previous hunk             |
+| `]c`             | Jump to next hunk                 |
 
 ### Hyprland
 
@@ -249,7 +276,7 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 - [ ] Add screen sharing support
 - [x] Implement automatic garbage collection
 - [x] Improve Neovim keymap organization with which-key integration
-- [ ] Add Git integration for Neovim
+- [x] Add Git integration for Neovim
 - [x] Improve battery notifications
 - [x] Configure ZRam for better performance
 - [ ] Implement a backup solution
