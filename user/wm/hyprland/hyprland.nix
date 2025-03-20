@@ -51,6 +51,7 @@ in
       # Autostart programs
       "exec-once" = [
         "waybar & hyprpaper"
+        "mako"
       ];
       
       # Environment variables
@@ -267,12 +268,38 @@ in
     grim
     slurp
     networkmanagerapplet
+    mako
   ];
 
   # Configuration files
   home.file = {
     "${config.xdg.configHome}/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
     "${config.xdg.configHome}/hypr/background.png".source = ./background.png;
+    "${config.xdg.configHome}/mako/config".text = ''
+      sort=-time
+      layer=overlay
+      background-color=#1e1e2e
+      width=300
+      height=110
+      border-size=2
+      border-color=#89b4fa
+      border-radius=4
+      icons=1
+      max-icon-size=64
+      default-timeout=5000
+      ignore-timeout=1
+      font=FiraCode Nerd Font 10
+
+      [urgency=low]
+      border-color=#94e2d5
+
+      [urgency=normal]
+      border-color=#89b4fa
+
+      [urgency=critical]
+      border-color=#f38ba8
+      default-timeout=0
+    '';
   };
 
   # Waybar configuration
