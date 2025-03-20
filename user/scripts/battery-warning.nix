@@ -1,52 +1,78 @@
 # user/scripts/battery-warning.nix
 { pkgs, ... }:
 
-{
-  home.packages = with pkgs; [
-    (writeShellScriptBin "battery-warning" ''
-      #!/usr/bin/env bash
-      
-      BATTERY_LEVEL=$(${pkgs.acpi}/bin/acpi -b | grep -P -o '[0-9]+(?=%)')
-      CHARGING_STATUS=$(${pkgs.acpi}/bin/acpi -b | grep -c "Charging")
-      
+let
+  batteryScript = pkgs.writeShellScriptBin "battery-warning" ''
+    #!/usr/bin/env bash
+    
+    echo "Starting battery check"
+    
+    if [ -e /sys/class/power_supply/BAT0 ]; then
+      # Try /sys/class approach first
+      if [ -e /sys/class/power_supply/BAT0/capacity ]; then
+        BATTERY_LEVEL=$(cat /sys/class/power_supply/BAT0/capacity)
+        CHARGING_STATUS=$(cat /sys/class/power_supply/BAT0/status | grep -c "Charging")
+        echo "Battery level: $BATTERY_LEVEL%, Charging status: $CHARGING_STATUS"
+      else
+        echo "Cannot read battery capacity from sysfs"
+        exit 1
+      fi
+    else
+      # Fallback to acpi
+      if command -v ${pkgs.acpi}/bin/acpi >/dev/null 2>&1; then
+        # Fix: properly extract the battery percentage and ensure it's a single number
+        BATTERY_LEVEL=$(${pkgs.acpi}/bin/acpi -b | grep -Po '[0-9]+(?=%)' | head -1)
+        CHARGING_STATUS=$(${pkgs.acpi}/bin/acpi -b | grep -c "Charging")
+        echo "Battery level (acpi): $BATTERY_LEVEL%, Charging status: $CHARGING_STATUS"
+      else
+        echo "Neither sysfs battery info nor acpi command is available"
+        exit 1
+      fi
+    fi
+    
+    # Check if BATTERY_LEVEL is a number
+    if [[ "$BATTERY_LEVEL" =~ ^[0-9]+$ ]]; then
+      # Actual check with proper numeric comparison
       if [ "$BATTERY_LEVEL" -le 15 ] && [ "$CHARGING_STATUS" -eq 0 ]; then
         ${pkgs.libnotify}/bin/notify-send -u critical "Battery Low" "Battery level is $BATTERY_LEVEL%. Please connect charger."
+        echo "Low battery notification sent"
+      else
+        echo "Battery level OK or charging"
       fi
-    '')
-    # Add acpi as a dependency so it's available in your system
+    else
+      echo "Error: Battery level is not a valid number: '$BATTERY_LEVEL'"
+      exit 1
+    fi
+  '';
+in
+{
+  home.packages = with pkgs; [
+    batteryScript
     acpi
+    libnotify
   ];
 
-  # Add a systemd timer to check battery periodically
-  systemd.user.timers.battery-warning = {
-    Unit = {
-      Description = "Low battery warning timer";
-    };
-    Timer = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "5m";
-    };
-    Install = {
-      WantedBy = [ "timers.target" ];
-    };
-  };
-  
   systemd.user.services.battery-warning = {
     Unit = {
       Description = "Low battery warning service";
     };
     Service = {
       Type = "oneshot";
-      ExecStart = "${pkgs.writeShellScriptBin "battery-warning" ''
-        #!/usr/bin/env bash
-        
-        BATTERY_LEVEL=$(${pkgs.acpi}/bin/acpi -b | grep -P -o '[0-9]+(?=%)')
-        CHARGING_STATUS=$(${pkgs.acpi}/bin/acpi -b | grep -c "Charging")
-        
-        if [ "$BATTERY_LEVEL" -le 15 ] && [ "$CHARGING_STATUS" -eq 0 ]; then
-          ${pkgs.libnotify}/bin/notify-send -u critical "Battery Low" "Battery level is $BATTERY_LEVEL%. Please connect charger."
-        fi
-      ''}/bin/battery-warning";
+      ExecStart = "${batteryScript}/bin/battery-warning";
+      Environment = "DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus";
+    };
+  };
+
+  systemd.user.timers.battery-warning = {
+    Unit = {
+      Description = "Low battery warning timer";
+    };
+    Timer = {
+      OnBootSec = "1m";
+      OnUnitActiveSec = "5m";
+    };
+    Install = {
+      WantedBy = [ "timers.target" ];
     };
   };
 }
