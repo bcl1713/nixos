@@ -130,4 +130,10 @@
       options = "--delete-older-than 30d";
     };
   };
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
 }
