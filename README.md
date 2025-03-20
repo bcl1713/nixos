@@ -136,84 +136,84 @@ The Neovim configuration includes:
 
 My Neovim configuration uses consistent keymap prefixes to organize commands:
 
-| Prefix | Description |
-|--------|-------------|
-| `<leader>l` | LSP operations (rename, format, symbols, etc.) |
-| `<leader>f` | File/Find operations (files, grep, buffers, etc.) |
-| `<leader>g` | Git operations (commits, branches, status) |
+| Prefix      | Description                                              |
+|-------------|----------------------------------------------------------|
+| `<leader>l` | LSP operations (rename, format, symbols, etc.)           |
+| `<leader>f` | File/Find operations (files, grep, buffers, etc.)        |
+| `<leader>g` | Git operations (commits, branches, status)               |
 | `<leader>m` | Markdown-specific operations (preview, tables, zen mode) |
-| `<leader>d` | Diagnostics operations |
-| `<leader>b` | Buffer operations |
-| `<leader>w` | Window operations |
-| `<leader>e` | File explorer (oil.nvim) |
+| `<leader>d` | Diagnostics operations                                   |
+| `<leader>b` | Buffer operations                                        |
+| `<leader>w` | Window operations                                        |
+| `<leader>e` | File explorer (oil.nvim)                                 |
 
 #### Common Keymaps
 
-| Shortcut | Action |
-|----------|--------|
-| `<leader><space>` | Find files |
-| `<leader>/` | Search text |
-| `<leader>e` | Open file explorer |
-| `-` | Navigate to parent directory in Oil |
-| `<leader>w` | Save file |
-| `<leader>q` | Quit |
-| `<C-h/j/k/l>` | Navigate between windows |
-| `<leader>wv` | Split window vertically |
-| `<leader>ws` | Split window horizontally |
+| Shortcut          | Action                              |
+|-------------------|-------------------------------------|
+| `<leader><space>` | Find files                          |
+| `<leader>/`       | Search text                         |
+| `<leader>e`       | Open file explorer                  |
+| `-`               | Navigate to parent directory in Oil |
+| `<leader>w`       | Save file                           |
+| `<leader>q`       | Quit                                |
+| `<C-h/j/k/l>`     | Navigate between windows            |
+| `<leader>wv`      | Split window vertically             |
+| `<leader>ws`      | Split window horizontally           |
 
 #### LSP Keymaps
 
-| Shortcut | Action |
-|----------|--------|
-| `<leader>lr` | Rename symbol |
-| `<leader>la` | Code action |
-| `<leader>lf` | Format document |
-| `<leader>ls` | Document symbols |
-| `gd` | Go to definition |
-| `gr` | Find references |
-| `K` | Show hover documentation |
+| Shortcut     | Action                   |
+|--------------|--------------------------|
+| `<leader>lr` | Rename symbol            |
+| `<leader>la` | Code action              |
+| `<leader>lf` | Format document          |
+| `<leader>ls` | Document symbols         |
+| `gd`         | Go to definition         |
+| `gr`         | Find references          |
+| `K`          | Show hover documentation |
 
 #### Diagnostics
 
-| Shortcut | Action |
-|----------|--------|
+| Shortcut     | Action                |
+|--------------|-----------------------|
 | `<leader>df` | Show line diagnostics |
-| `<leader>dl` | List all diagnostics |
-| `[d` | Previous diagnostic |
-| `]d` | Next diagnostic |
+| `<leader>dl` | List all diagnostics  |
+| `[d`         | Previous diagnostic   |
+| `]d`         | Next diagnostic       |
 
 #### Markdown-specific
 
-| Shortcut | Action |
-|----------|--------|
+| Shortcut     | Action                  |
+|--------------|-------------------------|
 | `<leader>mp` | Toggle markdown preview |
-| `<leader>mt` | Toggle table mode |
-| `<leader>mr` | Realign tables |
-| `<leader>mz` | Toggle zen mode |
-| `<leader>mx` | Toggle checkbox |
+| `<leader>mt` | Toggle table mode       |
+| `<leader>mr` | Realign tables          |
+| `<leader>mz` | Toggle zen mode         |
+| `<leader>mx` | Toggle checkbox         |
 
 ### Hyprland
 
-| Shortcut | Action |
-|----------|--------|
-| `Super + Return` | Open terminal |
-| `Super + C` | Close active window |
-| `Super + Space` | Open application launcher (wofi) |
-| `Super + E` | Open file manager |
-| `Super + B` | Open browser |
-| `Super + V` | Toggle floating mode |
-| `Super + 1-0` | Switch to workspace 1-10 |
-| `Super + Shift + 1-0` | Move window to workspace 1-10 |
-| `Super + S` | Toggle special workspace |
-| `Super + h/j/k/l` | Focus window in direction |
-| `Super + Mouse wheel` | Cycle through workspaces |
+| Shortcut              | Action                           |
+|-----------------------|----------------------------------|
+| `Super + Return`      | Open terminal                    |
+| `Super + C`           | Close active window              |
+| `Super + Space`       | Open application launcher (wofi) |
+| `Super + E`           | Open file manager                |
+| `Super + B`           | Open browser                     |
+| `Super + V`           | Toggle floating mode             |
+| `Super + 1-0`         | Switch to workspace 1-10         |
+| `Super + Shift + 1-0` | Move window to workspace 1-10    |
+| `Super + S`           | Toggle special workspace         |
+| `Super + h/j/k/l`     | Focus window in direction        |
+| `Super + Mouse wheel` | Cycle through workspaces         |
 
 ### Volume and Brightness
 
-| Shortcut | Action |
-|----------|--------|
-| `Volume Up/Down` | Change volume by 5% |
-| `Volume Mute` | Toggle mute |
+| Shortcut             | Action                   |
+|----------------------|--------------------------|
+| `Volume Up/Down`     | Change volume by 5%      |
+| `Volume Mute`        | Toggle mute              |
 | `Brightness Up/Down` | Change brightness by 10% |
 
 ## 📦 Included Packages
@@ -250,7 +250,7 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 - [x] Implement automatic garbage collection
 - [x] Improve Neovim keymap organization with which-key integration
 - [ ] Add Git integration for Neovim
-- [ ] Improve battery notifications
+- [x] Improve battery notifications
 - [x] Configure ZRam for better performance
 - [ ] Implement a backup solution
 - [ ] Add GPU acceleration optimizations
