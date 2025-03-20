@@ -30,6 +30,11 @@ This repository contains my personal NixOS configuration for a laptop setup runn
 - **Firefox** with enhanced privacy settings
 - **Kitty** terminal emulator with Catppuccin theme
 - **Declarative user scripts** for enhanced workflow
+- **System optimizations**:
+  - Automatic garbage collection
+  - ZRam support for better memory management
+  - Advanced TLP settings for improved battery life
+  - Automated low battery notifications
 
 ## 🧱 Structure
 
@@ -52,6 +57,9 @@ This repository contains my personal NixOS configuration for a laptop setup runn
     │   └── prusa
     ├── fonts                 # Font configuration
     ├── scripts               # Custom utility scripts
+    │   ├── battery-warning.nix  # Low battery notification service
+    │   ├── directory-combiner.nix # File combining utility
+    │   └── wifi-menu.nix     # Wofi-based WiFi selector
     └── wm                    # Window manager (Hyprland) configuration
         └── hyprland
             ├── waybar        # Waybar configuration
@@ -119,6 +127,9 @@ home-manager switch --flake .#brianl
   ```bash
   combine-directory /path/to/directory output.txt
   ```
+
+- **battery-warning**: Automatically runs in the background to monitor battery levels
+  and send notifications when battery is low
 
 ### Neovim
 
@@ -251,6 +262,7 @@ My Neovim configuration uses consistent keymap prefixes to organize commands:
 - **Development**: Nix LSP, Lua LSP, Markdown LSP
 - **Productivity**: NextCloud client
 - **Media**: PulseAudio, PipeWire
+- **Notifications**: Mako with Catppuccin theme
 - **Other**: Prusa Slicer, various fonts
 
 ## 🔧 Customization
@@ -269,6 +281,16 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 2. Update the Waybar theme in `user/wm/hyprland/waybar/`
 3. Change the terminal theme in `user/app/kitty/kitty.nix`
 4. Update the Neovim theme in `user/app/neovim/nvim/plugin/catppuccin.lua`
+5. Update the Mako notification theme in `user/wm/hyprland/hyprland.nix`
+
+## 🔄 Recent Improvements
+
+- Added automatic garbage collection to optimize disk usage
+- Implemented ZRam support for better memory management
+- Added Git integration for Neovim with gitsigns, fugitive, and diffview
+- Added automatic battery warnings with notifications
+- Added notification support via Mako with Catppuccin theme
+- Improved TLP power management with custom settings
 
 ## 📝 Todo / Future Improvements
 
