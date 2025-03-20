@@ -20,6 +20,7 @@
     ../../user/wm
     ../../user/scripts/directory-combiner.nix
     ../../user/scripts/wifi-menu.nix
+    ../../user/scripts/battery-warning.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
