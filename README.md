@@ -251,7 +251,7 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 - [x] Improve Neovim keymap organization with which-key integration
 - [ ] Add Git integration for Neovim
 - [ ] Improve battery notifications
-- [ ] Configure ZRam for better performance
+- [x] Configure ZRam for better performance
 - [ ] Implement a backup solution
 - [ ] Add GPU acceleration optimizations
 
