@@ -289,15 +289,26 @@ See the [CHANGELOG.md](./CHANGELOG.md) for a detailed list of recent changes and
 
 ## 📝 Todo / Future Improvements
 
-- [ ] Add screenshots
-- [ ] Add screen sharing support
-- [x] Implement automatic garbage collection
-- [x] Improve Neovim keymap organization with which-key integration
-- [x] Add Git integration for Neovim
-- [x] Improve battery notifications
-- [x] Configure ZRam for better performance
-- [ ] Implement a backup solution
-- [ ] Add GPU acceleration optimizations
+### Immediate Enhancements
+- [ ] Configure proper screen sharing support for Wayland using xdg-desktop-portal-hyprland
+- [ ] Implement GPU acceleration for Firefox and other applications
+- [ ] Add a proper lockscreen configuration with swaylock themed to match desktop
+- [ ] Configure swayidle for automatic screen locking and power saving
+
+### New Features
+- [ ] Add secrets management with agenix or sops-nix
+- [ ] Implement Bluetooth management and add a Waybar applet
+- [ ] Configure a backup system using restic, borgbackup, or rsync
+- [ ] Implement password manager integration with browser support
+
+### Refinements
+- [ ] Organize packages into logical groups (development, media, utilities)
+- [ ] Expand flake outputs to support multiple machines (desktop/laptop/server)
+- [ ] Add git hooks for linting and validating Nix code
+- [ ] Configure additional language-specific development environments
+- [ ] Add media tools (mpv, audio configuration with wireplumber)
+- [ ] Configure PDF tools (viewer, editor, converter)
+- [ ] Improve documentation with comprehensive keybinding reference
 
 ## 📚 Resources
 
