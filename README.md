@@ -20,6 +20,11 @@ This repository contains my personal NixOS configuration for a laptop setup runn
 - **Modular structure** that separates system and user configurations
 - **Full NixOS reproducibility** with flakes
 - **Neovim** configured for coding and markdown editing
+  - LSP integration with consistent keymap prefixes
+  - Telescope fuzzy finder with organized mappings
+  - Oil.nvim for file navigation
+  - Markdown tools (preview, tables, zen mode)
+  - Which-key for discoverable keybindings
 - **Waybar** with custom styling and battery indicators
 - **Firefox** with enhanced privacy settings
 - **Kitty** terminal emulator with Catppuccin theme
@@ -127,6 +132,66 @@ The Neovim configuration includes:
 
 ## ⌨️ Keyboard Shortcuts
 
+### Neovim
+
+My Neovim configuration uses consistent keymap prefixes to organize commands:
+
+| Prefix | Description |
+|--------|-------------|
+| `<leader>l` | LSP operations (rename, format, symbols, etc.) |
+| `<leader>f` | File/Find operations (files, grep, buffers, etc.) |
+| `<leader>g` | Git operations (commits, branches, status) |
+| `<leader>m` | Markdown-specific operations (preview, tables, zen mode) |
+| `<leader>d` | Diagnostics operations |
+| `<leader>b` | Buffer operations |
+| `<leader>w` | Window operations |
+| `<leader>e` | File explorer (oil.nvim) |
+
+#### Common Keymaps
+
+| Shortcut | Action |
+|----------|--------|
+| `<leader><space>` | Find files |
+| `<leader>/` | Search text |
+| `<leader>e` | Open file explorer |
+| `-` | Navigate to parent directory in Oil |
+| `<leader>w` | Save file |
+| `<leader>q` | Quit |
+| `<C-h/j/k/l>` | Navigate between windows |
+| `<leader>wv` | Split window vertically |
+| `<leader>ws` | Split window horizontally |
+
+#### LSP Keymaps
+
+| Shortcut | Action |
+|----------|--------|
+| `<leader>lr` | Rename symbol |
+| `<leader>la` | Code action |
+| `<leader>lf` | Format document |
+| `<leader>ls` | Document symbols |
+| `gd` | Go to definition |
+| `gr` | Find references |
+| `K` | Show hover documentation |
+
+#### Diagnostics
+
+| Shortcut | Action |
+|----------|--------|
+| `<leader>df` | Show line diagnostics |
+| `<leader>dl` | List all diagnostics |
+| `[d` | Previous diagnostic |
+| `]d` | Next diagnostic |
+
+#### Markdown-specific
+
+| Shortcut | Action |
+|----------|--------|
+| `<leader>mp` | Toggle markdown preview |
+| `<leader>mt` | Toggle table mode |
+| `<leader>mr` | Realign tables |
+| `<leader>mz` | Toggle zen mode |
+| `<leader>mx` | Toggle checkbox |
+
 ### Hyprland
 
 | Shortcut | Action |
@@ -180,16 +245,15 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 
 ## 📝 Todo / Future Improvements
 
+- [ ] Add screenshots
 - [ ] Add screen sharing support
 - [ ] Implement automatic garbage collection
-- [ ] Create a dashboard for Neovim
+- [x] Improve Neovim keymap organization with which-key integration
 - [ ] Add Git integration for Neovim
 - [ ] Improve battery notifications
 - [ ] Configure ZRam for better performance
 - [ ] Implement a backup solution
 - [ ] Add GPU acceleration optimizations
-- [ ] Configure development environments with devenv.sh
-- [ ] Set up container management with Podman
 
 ## 📚 Resources
 
@@ -200,4 +264,4 @@ The configuration uses the Catppuccin Mocha theme. To change it:
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](/LICENSE.md) file for details.
