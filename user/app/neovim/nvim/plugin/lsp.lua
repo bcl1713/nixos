@@ -1,3 +1,8 @@
+-- Setup leader keys here because I need them to be the first thing that happens.
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Setup neodev for Neovim Lua development
 -- This needs to be set up BEFORE lspconfig
 require('neodev').setup({

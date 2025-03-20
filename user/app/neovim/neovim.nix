@@ -19,6 +19,11 @@
       withPython3 = true;
       withRuby = true;
 
+      extraLuaConfig = ''
+        ${builtins.readFile ./nvim/options.lua}
+        ${builtins.readFile ./nvim/plugin/markdown-snippets.lua}
+      '';
+
       extraPackages = with pkgs; [
         # language servers
         lua-language-server # Lua
@@ -107,20 +112,15 @@
           config = toLuaFile ./nvim/plugin/headlines.lua;
         }
         {
-          plugin = which-key-nvim;
-          config = toLuaFile ./nvim/plugin/which-key.lua;
-        }
-        {
           plugin = zen-mode-nvim;
           config = toLuaFile ./nvim/plugin/zen-mode.lua;
         }
+        {
+          plugin = which-key-nvim;
+          config = toLuaFile ./nvim/plugin/which-key.lua;
+        }
 
       ];
-
-      extraLuaConfig = ''
-        ${builtins.readFile ./nvim/options.lua}
-        ${builtins.readFile ./nvim/plugin/markdown-snippets.lua}
-      '';
 
     };
 
