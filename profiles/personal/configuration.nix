@@ -97,7 +97,7 @@
     wget
     git
     nautilus
-    gnome.gnome-keyring
+    gnome-keyring
     libsecret
   ];
 
