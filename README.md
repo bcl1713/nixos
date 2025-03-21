@@ -62,6 +62,7 @@ This repository contains my personal NixOS configuration for a laptop setup runn
     │   └── wifi-menu.nix     # Wofi-based WiFi selector
     └── wm                    # Window manager (Hyprland) configuration
         └── hyprland
+            ├── swaylock      # Swaylock configuration
             ├── waybar        # Waybar configuration
             └── ...
 ```
@@ -245,6 +246,7 @@ My Neovim configuration uses consistent keymap prefixes to organize commands:
 | `Super + S`           | Toggle special workspace         |
 | `Super + h/j/k/l`     | Focus window in direction        |
 | `Super + Mouse wheel` | Cycle through workspaces         |
+| `Super + L`           | Lock screen                      |
 
 ### Volume and Brightness
 

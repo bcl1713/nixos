@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Swaylock screen locking with Catppuccin theme
+- Swayidle for automatic screen locking and power management
+- Keybinding for manual screen locking
+
 ### Fixed
 
 - PAM integrations fixed for unlock on login
