@@ -10,11 +10,12 @@
     ];
     timeouts = [
       { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -f"; }
-      { 
-        timeout = 600; 
-        command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        resumeCommand = "${pkgs.hyprland}/bin/hyprctls dispatch dpms on";
-      }
+      # Disabled for now because my screen doesn't come back on
+      # { 
+      #   timeout = 600; 
+      #   command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+      #   resumeCommand = "${pkgs.hyprland}/bin/hyprctls dispatch dpms on";
+      # }
     ];
   };
 
