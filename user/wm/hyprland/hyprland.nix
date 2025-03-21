@@ -194,6 +194,7 @@ in
         "$mainMod, space, exec, $menu"
         "$mainMod, P, pseudo,"
         "$mainMod, B, exec, $browser"
+        "$mainMod, L, exec, lock-screen"
         
         # Movement keys
         "$mainMod, h, movefocus, l"
@@ -301,6 +302,12 @@ in
       border-color=#f38ba8
       default-timeout=0
     '';
+  };
+
+  # Swaylock configuration
+  home.file."${config.xdg.configHome}/swaylock" = {
+    source = ./swaylock;
+    recursive = true;
   };
 
   # Waybar configuration
