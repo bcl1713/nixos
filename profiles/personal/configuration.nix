@@ -34,11 +34,18 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # PAM integration
+  security.pam.services = {
+    login.enableGnomeKeyring = true;
+    swaylock.enableGnomeKeyring = true;
+    gdm.enableGnomeKeyring = true;
+  };
 
   # Enable gnome keyring
   services.gnome.gnome-keyring.enable = true;
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
@@ -90,6 +97,8 @@
     wget
     git
     nautilus
+    gnome.gnome-keyring
+    libsecret
   ];
 
   programs.zsh.enable = true;

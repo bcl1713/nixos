@@ -52,6 +52,7 @@ in
       "exec-once" = [
         "waybar & hyprpaper"
         "mako"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hprland"
       ];
       
       # Environment variables
