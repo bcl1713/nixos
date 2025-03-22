@@ -195,7 +195,7 @@ in
         "$mainMod, space, exec, $menu"
         "$mainMod, P, pseudo,"
         "$mainMod, B, exec, $browser"
-        "$mainMod, L, exec, lock-screen"
+        "$mainMod, X, exec, lock-screen"
         
         # Movement keys
         "$mainMod, h, movefocus, l"

@@ -246,7 +246,7 @@ My Neovim configuration uses consistent keymap prefixes to organize commands:
 | `Super + S`           | Toggle special workspace         |
 | `Super + h/j/k/l`     | Focus window in direction        |
 | `Super + Mouse wheel` | Cycle through workspaces         |
-| `Super + L`           | Lock screen                      |
+| `Super + X`           | Lock screen                      |
 
 ### Volume and Brightness
 
