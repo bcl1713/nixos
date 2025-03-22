@@ -135,7 +135,7 @@
     glxinfo
     vulkan-tools
     pciutils
-    nvtop
+    nvtopPackages.full
     intel-gpu-tools
 
     (writeShellScriptBin "nvidia-offload" ''
