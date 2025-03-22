@@ -90,6 +90,17 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  # GPU switching configuration
+  hardware.nvidia.prime = {
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
+    # Bus ID values can be found using `lspci`
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:2:0:0";
+  };
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -119,6 +130,18 @@
     nautilus
     gnome-keyring
     libsecret
+
+    #GPU tools
+    glxinfo
+    vulkan-tools
+
+    (writeShellScriptBin "nvidia-offload" ''
+      export __NV_PRIME_RENDER_OFFLOAD=1
+      export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+      export __GLX_VENDOR_LIBRARY_NAME=nvidia
+      export __VK_LAYER_NV_optimus=NVIDIA_only
+      exec "$@"
+    '')
   ];
 
   programs.zsh.enable = true;
