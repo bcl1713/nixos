@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Swaylock screen locking with Catppuccin theme
 - Swayidle for automatic screen locking and power management
 - Keybinding for manual screen locking
+- Proper screen sharing support using xdg-desktop-portal-hyprland
 
 ### Fixed
 

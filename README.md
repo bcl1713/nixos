@@ -16,6 +16,7 @@ This repository contains my personal NixOS configuration for a laptop setup runn
 ## ✨ Features
 
 - **Hyprland Wayland compositor** with a Catppuccin Mocha theme
+- **Proper screen sharing support** for video conferencing apps like Google Meet
 - **Home Manager** integration for user configuration
 - **Modular structure** that separates system and user configurations
 - **Full NixOS reproducibility** with flakes
@@ -292,10 +293,7 @@ See the [CHANGELOG.md](./CHANGELOG.md) for a detailed list of recent changes and
 ## 📝 Todo / Future Improvements
 
 ### Immediate Enhancements
-- [ ] Configure proper screen sharing support for Wayland using xdg-desktop-portal-hyprland
 - [ ] Implement GPU acceleration for Firefox and other applications
-- [ ] Add a proper lockscreen configuration with swaylock themed to match desktop
-- [ ] Configure swayidle for automatic screen locking and power saving
 
 ### New Features
 - [ ] Add secrets management with agenix or sops-nix
