@@ -19,6 +19,7 @@
       diff.colorMoved = "default";
       # Reference the template with proper path
       commit.template = "${config.xdg.configHome}/git/commit-template";
+      push.autoSetupRemote = true;
     };
   };
 
