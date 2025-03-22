@@ -1,6 +1,6 @@
 # profiles/personal/configuration.nix
 
-{ inputs, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   imports =
@@ -75,6 +75,23 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Graphics hardware configuration
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  # Enable and configure NVIDIA drivers
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
