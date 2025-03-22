@@ -8,6 +8,18 @@
       ./hardware-configuration.nix
     ];
 
+  # NVIDIA modules
+  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.kernelModules = [
+    "nvidia"
+    "nvidia_modest"
+    "nvidia_uvm"
+    "nvidia_drm"
+  ];
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -97,8 +109,8 @@
       enableOffloadCmd = true;
     };
     # Bus ID values can be found using `lspci`
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:2:0:0";
+    intelBusId = "PCI:00:02.0";
+    nvidiaBusId = "PCI:02:00.0";
   };
 
   # Enable sound with pipewire.
