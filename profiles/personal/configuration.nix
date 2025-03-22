@@ -77,10 +77,8 @@
   services.printing.enable = true;
 
   # Graphics hardware configuration
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
-  };
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 
   # Enable and configure NVIDIA drivers
   hardware.nvidia = {
@@ -93,7 +91,7 @@
   };
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
