@@ -134,6 +134,9 @@
     #GPU tools
     glxinfo
     vulkan-tools
+    pciutils
+    nvtop
+    intel-gpu-tools
 
     (writeShellScriptBin "nvidia-offload" ''
       export __NV_PRIME_RENDER_OFFLOAD=1
