@@ -15,6 +15,9 @@ This repository contains my personal NixOS configuration for a laptop setup runn
 
 ## ✨ Features
 
+- **Hybrid Graphics Support** with Intel/NVIDIA configuration
+  - NVIDIA offload for running specific applications on the dedicated GPU
+  - Power-efficient configuration to extend battery life
 - **Hyprland Wayland compositor** with a Catppuccin Mocha theme
 - **Proper screen sharing support** for video conferencing apps like Google Meet
 - **Home Manager** integration for user configuration
@@ -256,6 +259,20 @@ My Neovim configuration uses consistent keymap prefixes to organize commands:
 | `Volume Up/Down`     | Change volume by 5%      |
 | `Volume Mute`        | Toggle mute              |
 | `Brightness Up/Down` | Change brightness by 10% |
+
+### GPU Management
+
+You can run applications on the NVIDIA GPU by using the `nvidia-offload`
+command:
+
+```bash
+# Example: Run Firefox on the NVIDIA GPU
+nvidia-offload firefox
+
+# Example: run a game with NVIDIA GPU
+nvidia-offload steam
+```
+
 
 ## 📦 Included Packages
 

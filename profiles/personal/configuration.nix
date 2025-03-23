@@ -13,7 +13,7 @@
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.kernelModules = [
     "nvidia"
-    "nvidia_modest"
+    "nvidia_modeset"
     "nvidia_uvm"
     "nvidia_drm"
   ];
@@ -58,6 +58,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = ["nvidia"];
 
   # Enable the GNOME Desktop Environment.
   # services.xserver.displayManager.gdm.enable = true;
@@ -70,7 +71,7 @@
     ];
     config = {
       common.default = "*";
-      hyprland.defaut = ["hyprland" "gtk"];
+      hyprland.default = ["hyprland" "gtk"];
     };
   };
 
@@ -109,8 +110,8 @@
       enableOffloadCmd = true;
     };
     # Bus ID values can be found using `lspci`
-    intelBusId = "PCI:00:02.0";
-    nvidiaBusId = "PCI:02:00.0";
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:2:0:0";
   };
 
   # Enable sound with pipewire.

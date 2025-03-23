@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Swayidle for automatic screen locking and power management
 - Keybinding for manual screen locking
 - Proper screen sharing support using xdg-desktop-portal-hyprland
+- NVIDIA driver support with Intel/NVIDIA hybrid graphics configuration
+- GPU diagnostic tools (glxinfo, vulkan-tools, nvtop, intel-gpu-tools)
+- NVIDIA offload script for running applications on the dedicated GPU
 
 ### Fixed
 
