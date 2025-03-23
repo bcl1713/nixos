@@ -309,9 +309,6 @@ See the [CHANGELOG.md](./CHANGELOG.md) for a detailed list of recent changes and
 
 ## 📝 Todo / Future Improvements
 
-### Immediate Enhancements
-- [ ] Implement GPU acceleration for Firefox and other applications
-
 ### New Features
 - [ ] Add secrets management with agenix or sops-nix
 - [ ] Implement Bluetooth management and add a Waybar applet
