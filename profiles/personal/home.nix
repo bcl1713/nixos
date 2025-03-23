@@ -4,12 +4,14 @@
 
 {
   home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
+  home.homeDirectory = "/home/" + userSettings.username;
+
+  nixpkgs.config.allowUnfree = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ 
+  imports = [
     ../../user/app/git/git.nix
     ../../user/app/neovim/neovim.nix
     ../../user/app/firefox/firefox.nix
@@ -21,7 +23,35 @@
     ../../user/scripts/directory-combiner.nix
     ../../user/scripts/wifi-menu.nix
     ../../user/scripts/battery-warning.nix
+    ../../user/packages
   ];
+
+  userPackages = {
+    system.enable = true;
+
+    development = {
+      enable = true;
+      nix.enable = true;
+      markdown.enable = true;
+      nodejs.enable = true;
+      python.enable = true;
+      tooling.enable = true;
+    };
+
+    media = {
+      enable = true;
+      audio.enable = true;
+      video.enable = true;
+      image.enable = true;
+    };
+
+    utilities = {
+      enable = true;
+      system.enable = true;
+      files.enable = true;
+      wayland.enable = true;
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -32,14 +62,7 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
-  home.packages = with pkgs; [
-    glow
-    nodePackages.markdownlint-cli2
-  ];
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   programs.zsh = {
     enable = true;

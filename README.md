@@ -44,31 +44,36 @@ This repository contains my personal NixOS configuration for a laptop setup runn
 
 ```
 .
-├── flake.nix                 # The entry point for the configuration
-├── flake.lock                # Lock file for reproducible builds
-├── profiles                  # System profiles
-│   └── personal              # Personal profile configuration
-│       ├── configuration.nix # Main system configuration
-│       ├── home.nix          # Home manager configuration
-│       └── hardware-configuration.nix
-└── user                      # User-specific configurations
-    ├── app                   # Application configurations
-    │   ├── firefox
-    │   ├── git
-    │   ├── kitty
-    │   ├── neovim
-    │   ├── nextcloud
-    │   └── prusa
-    ├── fonts                 # Font configuration
-    ├── scripts               # Custom utility scripts
-    │   ├── battery-warning.nix  # Low battery notification service
-    │   ├── directory-combiner.nix # File combining utility
-    │   └── wifi-menu.nix     # Wofi-based WiFi selector
-    └── wm                    # Window manager (Hyprland) configuration
+├── flake.lock                     # Lock file for reproducable builds
+├── flake.nix                      # Entry point for the configuration
+├── profiles                       # System profiles
+│   └── personal                   # Personal profile configuration
+│       ├── configuration.nix      # Main system configuration
+│       ├── hardware-configuration.nix
+│       └── home.nix               # Home manager configuration
+└── user                           # User-specific configurations
+    ├── app                        # Application configurations
+    │   ├── firefox
+    │   ├── git
+    │   ├── kitty
+    │   ├── neovim
+    │   ├── nextcloud
+    │   └── prusa
+    ├── fonts                      # Font configuration
+    ├── packages
+    │   ├── default.nix            # Main entry point for package modules
+    │   ├── development            # Development tools
+    │   ├── media                  # Media applications
+    │   ├── system                 # System utilities
+    │   └── utilities              # General utilities
+    ├── scripts                    # Custom utility scripts
+    │   ├── battery-warning.nix    # Low battery notification service
+    │   ├── directory-combiner.nix # File combining utility
+    │   └── wifi-menu.nix          # Wofi-based WiFi selector
+    └── wm                         # Window manager (Hyprland) configuration
         └── hyprland
-            ├── swaylock      # Swaylock configuration
-            ├── waybar        # Waybar configuration
-            └── ...
+            ├── swaylock           # Swaylock configuration
+            └── waybar             # Waybar configuration
 ```
 
 ## 📋 Installation
@@ -100,6 +105,23 @@ home-manager switch --flake .#brianl
 ```
 
 ## 🚀 Usage
+
+### Package Management
+
+Each module can be individually enabled in the profile configuration:
+
+```nix
+userPackages = {
+    enable = true;
+    development = {
+        enable = true;
+        python.enable = true;
+        # Other options...
+    };
+    # Other module optioins...
+};
+```
+
 
 ### System Management
 

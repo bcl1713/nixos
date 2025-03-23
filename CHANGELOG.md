@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - NVIDIA driver support with Intel/NVIDIA hybrid graphics configuration
 - GPU diagnostic tools (glxinfo, vulkan-tools, nvtop, intel-gpu-tools)
 - NVIDIA offload script for running applications on the dedicated GPU
+- Modular package management system with toggleable components
+- Organized packages into logical groups: system, development, media, utilities
+- Added support for multiple development environments (Python, Node.js, Nix)
+- Added media tools (mpv, ffmpeg, image viewers)
+- Added system utilities (monitoring, file management)
+
+### Changed
+
+- Refactored package management for better organization and flexibility
+- Updated README with package module information
 
 ### Fixed
 
