@@ -1,9 +1,10 @@
 # user/wm/hyprland/swayidle.nix
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
 {
   services.swayidle = {
     enable = true;
+    systemdTarget = "hyprland-session.target";
     events = [
       { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock -f"; }
       { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock -f"; }
@@ -13,7 +14,7 @@
       { 
         timeout = 600; 
         command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        resumeCommand = "${pkgs.hyprland}/bin/hyprctls dispatch dpms on";
+        resumeCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
       }
     ];
   };
