@@ -1,0 +1,26 @@
+# user/wm/hyprland/swaylock/config
+indicator-radius=145
+indicator-thickness=15
+indicator-caps-lock
+
+ring-color=181825
+ring-ver-color=89b4fa
+ring-clear-color=f5e0dc
+ring-wrong-color=f38ba8
+
+inside-color=1e1e2e
+inside-ver-color=1e1e2e
+inside-clear-color=1e1e2e
+inside-wrong-color=1e1e2e
+
+text-color=cdd6f4
+text-ver-color=ccd6f4
+text-clear-color=ccd6f4
+text-wrong-color=f38ba8
+
+key-hl-color=89b4fa
+line-color=1e1e2e
+separator-color=1e1e2e
+color=1e1e2e
+
+font=FiraCode Nerd Font Mono
