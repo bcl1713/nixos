@@ -3,6 +3,7 @@
 { ... }:
 
 {
-  imports = [ ./system ./development ./media ./utilities ];
+  imports =
+    [ ./system ./development ./media ./utilities ./apps ./scripts ./wm ];
 
 }

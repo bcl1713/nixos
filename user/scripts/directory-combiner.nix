@@ -1,32 +1,25 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
-let
-  cfg = config.programs.directory-combiner;
-in
-{
+let cfg = config.programs.directory-combiner;
+in {
   options.programs.directory-combiner = {
     enable = mkEnableOption "directory combiner utility";
-    
+
     package = mkOption {
       type = types.package;
       default = pkgs.writeShellScriptBin "combine-directory" ''
         #!/usr/bin/env bash
-        
+
         # combine-directory: Recursively combines all files in a directory
         # with headers showing relative paths
-        
+
         set -euo pipefail
-        
+
         # Default configuration
         INCLUDE_HIDDEN=0
-        
+
         # Function to show usage
         show_usage() {
           echo "Usage: combine-directory [OPTIONS] <directory> [output-file]"
@@ -36,10 +29,10 @@ in
           echo ""
           echo "If output-file is not specified, output goes to stdout"
         }
-        
+
         # Parse command line arguments
         POSITIONAL_ARGS=()
-        
+
         while [[ $# -gt 0 ]]; do
           case $1 in
             -a|--all)
@@ -61,24 +54,24 @@ in
               ;;
           esac
         done
-        
+
         # Restore positional parameters
         set -- "''${POSITIONAL_ARGS[@]}"
-        
+
         if [ $# -lt 1 ]; then
           show_usage
           exit 1
         fi
-        
+
         TARGET_DIR="$1"
         OUTPUT_FILE=""
-        
+
         if [ $# -ge 2 ]; then
           OUTPUT_FILE="$2"
           # Clear the output file if it exists
           > "$OUTPUT_FILE"
         fi
-        
+
         # Function to process files
         process_files() {
           local dir="$1"
@@ -153,13 +146,13 @@ in
             process_files "$subdir" "$new_rel_path"
           done
         }
-        
+
         # Check if the directory exists
         if [ ! -d "$TARGET_DIR" ]; then
           echo "Error: Directory '$TARGET_DIR' does not exist"
           exit 1
         fi
-        
+
         # Start processing from the root directory
         if [ -n "$OUTPUT_FILE" ]; then
           echo "Combining files from '$TARGET_DIR' into '$OUTPUT_FILE'..."
@@ -171,57 +164,57 @@ in
       '';
       description = "The package providing the directory combiner utility";
     };
-    
+
     extraOptions = mkOption {
       type = types.attrs;
-      default = {};
+      default = { };
       description = "Extra options to pass to the directory combiner script";
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ 
-      cfg.package 
-      pkgs.file  # Add dependency on the 'file' command
+    home.packages = [
+      cfg.package
+      pkgs.file # Add dependency on the 'file' command
     ];
-    
+
     # Create a simple wrapper with documentation
     home.file.".local/share/directory-combiner/README.md".text = ''
       # Directory Combiner
-      
+
       A utility to recursively combine all files in a directory with headers showing relative paths.
       Binary files are detected and listed, but their content is excluded.
-      
+
       ## Usage
-      
+
       ```
       combine-directory [OPTIONS] <directory> [output-file]
       ```
-      
+
       ### Options
-      
+
       - `-a, --all` - Include hidden files and directories (those starting with a dot)
       - `-h, --help` - Show help message
-      
+
       ### Notes
-      
+
       - By default, hidden files and directories are excluded
       - If no output file is specified, the combined content is printed to stdout
       - Each file is prefixed with a header showing its relative path from the root directory
-      
+
       ## Examples
-      
+
       ```bash
       # Basic usage - exclude hidden files and directories
       combine-directory ~/projects/my-code combined-output.txt
-      
+
       # Include hidden files and directories
       combine-directory --all ~/projects/my-code combined-output.txt
-      
+
       # Output to stdout instead of a file
       combine-directory ~/projects/my-code | less
       ```
-      
+
       This will create a file `combined-output.txt` containing all non-hidden files from `~/projects/my-code` 
       with headers showing their relative paths.
     '';

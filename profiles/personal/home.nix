@@ -12,17 +12,8 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ../../user/app/git/git.nix
     ../../user/app/neovim/neovim.nix
-    ../../user/app/firefox/firefox.nix
-    ../../user/app/nextcloud/nextcloud.nix
-    ../../user/app/kitty/kitty.nix
-    ../../user/app/prusa/prusa.nix
     ../../user/fonts/fonts.nix
-    ../../user/wm
-    ../../user/scripts/directory-combiner.nix
-    ../../user/scripts/wifi-menu.nix
-    ../../user/scripts/battery-warning.nix
     ../../user/packages
   ];
 
@@ -96,7 +87,5 @@
       }
     ];
   };
-
-  programs.directory-combiner.enable = true;
 
 }
