@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated README with package module information
 - Completed migration of window manager configuration to packages
 - Completed migration of scripts to packages
+- Migrated neovim configuration from app to package structure
+- Added editors category to package system for better organization
+- Completed full migration of applications to packages
 - Removed deprecated directories
 
 ### Fixed
