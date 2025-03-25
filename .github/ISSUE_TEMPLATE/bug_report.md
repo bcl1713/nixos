@@ -1,4 +1,3 @@
-
 ---
 name: Bug Fix Template
 about: Suggest a new feature for this project
