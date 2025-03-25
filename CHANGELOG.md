@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Output file generator script to combine directory contents and github issues
 
 ### Changed
+- Refactored scripts module by splitting output-generator into a separate file
+- Removed tools..nix and simplified scripts module structure
+- Improved modularity by moving script implementations to dedicated files
 
 ### Fixed
 
