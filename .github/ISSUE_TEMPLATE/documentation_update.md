@@ -1,8 +1,8 @@
 ---
 name: Documentation Update
 about: Suggest a documentation update
-title: "[v0.4.0] Document "
-labels: documentation, v0.4.0
+title: "Document "
+labels: documentation
 assignees: ''
 ---
 

@@ -1,12 +1,10 @@
 ---
-name: Bug Fix Template
-about: Suggest a new feature for this project
-title: "[v0.4.0] "
-labels: bug, v0.4.0
+name: Bug Report
+about: Report a bug
+title: "Bug: "
+labels: bug
 assignees: ''
 ---
-
-Title: [v0.4.0] Fix <Issue Description>
 
 ## Description
 Brief description of the bug to be fixed.
