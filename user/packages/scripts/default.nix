@@ -6,7 +6,7 @@ with lib;
 
 let cfg = config.userPackages.scripts;
 in {
-  imports = [ ./wifi.nix ./battery.nix ./tools.nix ];
+  imports = [ ./wifi.nix ./battery.nix ./directory-combiner.nix ./output-generator.nix ];
 
   options.userPackages.scripts = {
     enable = mkOption {
@@ -43,27 +43,19 @@ in {
       };
     };
 
-    tools = {
+    directoryCombiner = {
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Whether to enable utility tools";
+        description = "Whether to enable directory combiner tool";
       };
+    };
 
-      directoryCombiner = {
-        enable = mkOption {
-          type = types.bool;
-          default = true;
-          description = "Whether to enable directory combiner tool";
-        };
-      };
-
-      outputGenerator = {
-        enable = mkOption {
-          type = types.bool;
-          default = true;
-          description = "Whether to enable output file generator script";
-        };
+    outputGenerator = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Whether to enable output file generator script";
       };
     };
   };
