@@ -7,7 +7,7 @@ This document outlines the planned development for this NixOS configuration. It 
 ### Desktop Environment
 - [ ] Implement screen recording functionality
 - [ ] Improve screenshot tools with annotation capabilities
-- [ ] Add clipboard manager with history
+- [x] Add clipboard manager with history
 
 ### Development Environment
 - [ ] Implement language-specific environments for Rust and Go
