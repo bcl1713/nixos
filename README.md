@@ -49,6 +49,8 @@ This repository contains a comprehensive NixOS Home-Manager configuration struct
   - `wifi-menu`: Interactive WiFi connection manager
   - `battery-warning`: Low battery notification system
   - `combine-directory`: Utility to recursively combine directory contents
+- **Clipboard Management**:
+  - Clipboard history with Clipman integration
 
 ### System Integration
 

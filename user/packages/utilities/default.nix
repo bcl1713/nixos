@@ -6,6 +6,8 @@ with lib;
 
 let cfg = config.userPackages.utilities;
 in {
+  imports = [ ./clipboard.nix ];
+
   options.userPackages.utilities = {
     enable = mkEnableOption "Enable utility tools";
 
@@ -14,6 +16,7 @@ in {
     files = { enable = mkEnableOption "Enable file management tools"; };
 
     wayland = { enable = mkEnableOption "Enable Wayland-specific utilities"; };
+
   };
 
   config = mkMerge [

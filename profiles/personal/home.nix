@@ -44,6 +44,7 @@
       system.enable = true;
       files.enable = true;
       wayland.enable = true;
+      clipboard.enable = true;
     };
 
     editors = {
