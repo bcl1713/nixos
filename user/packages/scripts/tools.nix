@@ -1,7 +1,4 @@
 # user/packages/scripts/tools.nix
-#
-# This module provides utility tools and scripts.
-# The directory-combiner tool can recursively combine all files in a directory.
 
 { config, lib, pkgs, ... }:
 
@@ -10,7 +7,7 @@ with lib;
 let cfg = config.userPackages.scripts.tools;
 in {
   # Import the module definition for directory-combiner
-  imports = [ ../../scripts/directory-combiner.nix ];
+  imports = [ ./directory-combiner.nix ];
 
   config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.directoryCombiner.enable {
