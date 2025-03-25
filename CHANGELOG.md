@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cliboard manager with history support for Wayland using Clipman
 - Hyprland integration for clipbaord history via Super+V
 - GitHub CLI utility with aliases and shell completions
+- Output file generator script to combine directory contents and github issues
 
 ### Changed
 
