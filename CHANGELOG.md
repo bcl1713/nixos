@@ -7,38 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+## [0.3.0] - 2025-03-24
 
-- Swaylock screen locking with Catppuccin theme
-- Swayidle for automatic screen locking and power management
-- Keybinding for manual screen locking
-- Proper screen sharing support using xdg-desktop-portal-hyprland
-- NVIDIA driver support with Intel/NVIDIA hybrid graphics configuration
-- GPU diagnostic tools (glxinfo, vulkan-tools, nvtop, intel-gpu-tools)
-- NVIDIA offload script for running applications on the dedicated GPU
-- Modular package management system with toggleable components
-- Organized packages into logical groups: system, development, media, utilities
-- Added support for multiple development environments (Python, Node.js, Nix)
-- Added media tools (mpv, ffmpeg, image viewers)
-- Added system utilities (monitoring, file management)
+### Added
+- Firefox browser configuration with privacy enhancements
+- Creative applications module with PrusaSlicer support
+- Git configuration with commit templates and hooks
+- Productivity apps with Nextcloud client integration
+- Markdown support in Neovim with zen mode and preview
+- Terminal configuration with Kitty terminal
+- Directory combiner utility script
 
 ### Changed
-
-- Refactored package management for better organization and flexibility
-- Updated README with package module information
-- Completed migration of window manager configuration to packages
-- Completed migration of scripts to packages
-- Migrated neovim configuration from app to package structure
-- Added editors category to package system for better organization
-- Completed full migration of applications to packages
-- Removed deprecated directories
-- Migrated font configuration to package module structure
+- Improved Hyprland configuration with Catppuccin theme
+- Enhanced Neovim configuration with better LSP support
+- Restructured module organization for better maintainability
+- Updated documentation to reflect new modules
 
 ### Fixed
-
-- PAM integrations fixed for unlock on login
-- Nextcloud Client service startup fixes
-- Swayidle wait for Hyprland to start
+- Battery warning script detection logic
+- Nextcloud client startup issues
 ## [0.2.0] - 2025-03-19
 
 ### Added
