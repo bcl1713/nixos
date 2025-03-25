@@ -4,7 +4,9 @@
 
 with lib;
 
-let cfg = config.userPackages.editors.neovim;
+let 
+  cfg = config.userPackages.editors.neovim;
+  toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
 in {
   options.userPackages.editors.neovim = {
     plugins = {
@@ -41,13 +43,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.neovim = let
-      toLuaFile = file: ''
-        lua << EOF
-        ${builtins.readFile file}
-        EOF
-      '';
-    in {
+    programs.neovim = {
       enable = true;
 
       defaultEditor = true;
@@ -66,9 +62,9 @@ in {
       extraPackages = with pkgs; [
         # language servers
         lua-language-server # Lua
-        nil # Nix
-        nixd # Nix
-        nodePackages.yaml-language-server # YAML
+        nil # Nix 
+        nixd  # Nix
+        nodePackages.yaml-language-server  # YAML
         marksman # Markdown
 
         # clipboard support
@@ -76,109 +72,102 @@ in {
         wl-clipboard
       ];
 
-      plugins = with pkgs.vimPlugins;
-        let
-          pluginsList = [
-            # LSP
-            # neodev must be loaded before lspconfig
-            neodev-nvim
-            {
-              plugin = nvim-lspconfig;
-              config = toLuaFile ./lua/plugin/lsp.lua;
-            }
+      plugins = with pkgs.vimPlugins; 
+        # Base plugins always included
+        [
+          # LSP
+          neodev-nvim
+          {
+            plugin = nvim-lspconfig;
+            config = toLuaFile ./lua/plugin/lsp.lua;
+          }
 
-            # Completion
-            nvim-cmp
-            {
-              plugin = nvim-cmp;
-              config = toLuaFile ./lua/plugin/cmp.lua;
-            }
-            cmp_luasnip
-            cmp-nvim-lsp
-            luasnip
-            friendly-snippets
+          # Completion
+          nvim-cmp 
+          {
+            plugin = nvim-cmp;
+            config = toLuaFile ./lua/plugin/cmp.lua;
+          }
+          cmp_luasnip
+          cmp-nvim-lsp
+          luasnip
+          friendly-snippets
 
-            # Navigation
-            {
-              plugin = telescope-nvim;
-              config = toLuaFile ./lua/plugin/telescope.lua;
-            }
+          # Navigation
+          {
+            plugin = telescope-nvim;
+            config = toLuaFile ./lua/plugin/telescope.lua;
+          }
+          
+          # File navigation
+          {
+            plugin = oil-nvim;
+            config = toLuaFile ./lua/plugin/oil.lua;
+          }
 
-            # Adding oil.nvim for file navigation
-            {
-              plugin = oil-nvim;
-              config = toLuaFile ./lua/plugin/oil.lua;
-            }
+          # Utility
+          {
+            plugin = lualine-nvim;
+            config = toLuaFile ./lua/plugin/lualine.lua;
+          }
+          nvim-web-devicons
 
-            # Utility
-            {
-              plugin = lualine-nvim;
-              config = toLuaFile ./lua/plugin/lualine.lua;
-            }
-            nvim-web-devicons
+          {
+            plugin = (nvim-treesitter.withPlugins (p: [
+              p.tree-sitter-nix
+              p.tree-sitter-vim
+              p.tree-sitter-bash
+              p.tree-sitter-lua
+              p.tree-sitter-python
+              p.tree-sitter-json
+              p.tree-sitter-markdown
+              p.tree-sitter-markdown-inline
+            ]));
+            config = toLuaFile ./lua/plugin/treesitter.lua;
+          }
 
-            {
-              plugin = (nvim-treesitter.withPlugins (p: [
-                p.tree-sitter-nix
-                p.tree-sitter-vim
-                p.tree-sitter-bash
-                p.tree-sitter-lua
-                p.tree-sitter-python
-                p.tree-sitter-json
-                p.tree-sitter-markdown
-                p.tree-sitter-markdown-inline
-              ]));
-              config = toLuaFile ./lua/plugin/treesitter.lua;
-            }
+          vim-nix
 
-            vim-nix
-
-            {
-              plugin = catppuccin-nvim;
-              config = toLuaFile ./lua/plugin/catppuccin.lua;
-            }
-
-            # Markdown-specific plugins (conditional)
-            (mkIf cfg.plugins.markdown.enable [
-              {
-                plugin = markdown-preview-nvim;
-                config = toLuaFile ./lua/plugin/markdown-preview.lua;
-              }
-              {
-                plugin = vim-table-mode;
-                config = toLuaFile ./lua/plugin/table-mode.lua;
-              }
-              {
-                plugin = headlines-nvim;
-                config = toLuaFile ./lua/plugin/headlines.lua;
-              }
-              {
-                plugin = zen-mode-nvim;
-                config = toLuaFile ./lua/plugin/zen-mode.lua;
-              }
-            ])
-
-            {
-              plugin = which-key-nvim;
-              config = toLuaFile ./lua/plugin/which-key.lua;
-            }
-
-            # Git integration (conditional)
-            (mkIf cfg.plugins.git.enable [
-              {
-                plugin = gitsigns-nvim;
-                config = toLuaFile ./lua/plugin/git.lua;
-              }
-              vim-fugitive
-              diffview-nvim
-            ])
-
-            plenary-nvim
-          ];
-
-          # Flatten the list to remove conditionals
-          flattened = flatten pluginsList;
-        in flattened;
+          {
+            plugin = catppuccin-nvim;
+            config = toLuaFile ./lua/plugin/catppuccin.lua;
+          }
+          
+          {
+            plugin = which-key-nvim;
+            config = toLuaFile ./lua/plugin/which-key.lua;
+          }
+          
+          plenary-nvim
+        ] 
+        # Conditionally add markdown plugins
+        ++ (optionals cfg.plugins.markdown.enable [
+          {
+            plugin = markdown-preview-nvim;
+            config = toLuaFile ./lua/plugin/markdown-preview.lua;
+          }
+          {
+            plugin = vim-table-mode;
+            config = toLuaFile ./lua/plugin/table-mode.lua;
+          }
+          {
+            plugin = headlines-nvim;
+            config = toLuaFile ./lua/plugin/headlines.lua;
+          }
+          {
+            plugin = zen-mode-nvim;
+            config = toLuaFile ./lua/plugin/zen-mode.lua;
+          }
+        ])
+        # Conditionally add git plugins
+        ++ (optionals cfg.plugins.git.enable [
+          {
+            plugin = gitsigns-nvim;
+            config = toLuaFile ./lua/plugin/git.lua;
+          }
+          vim-fugitive
+          diffview-nvim
+        ]);
     };
 
     programs.ripgrep.enable = true;
