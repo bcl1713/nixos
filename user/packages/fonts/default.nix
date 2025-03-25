@@ -39,9 +39,9 @@ in {
 
     home.packages = with pkgs;
       [ liberation_ttf noto-fonts noto-fonts-emoji ]
-      ++ (optionals (cfg.nerdFonts.enable && cfg.nerdFonts.firaCode.enable)
-        [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ])
-      ++ (optionals cfg.systemFonts.enable [
+      ++ (optionals (cfg.nerdFonts.enable && cfg.nerdFonts.firaCode.enable) [
+        nerd-fonts.fira-code # Updated to use the new namespace
+      ]) ++ (optionals cfg.systemFonts.enable [
         fira-code
         fira-code-symbols
         font-awesome
