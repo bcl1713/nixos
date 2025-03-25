@@ -24,6 +24,7 @@ This repository contains a comprehensive NixOS Home-Manager configuration struct
 - **Languages**: Support for Nix, Node.js, Python, and Markdown
 - **Tools**: Code formatting, linting, and development utilities
 - **Git**: Comprehensive Git configuration with conventional commits
+- **GitHub**: CLI utility for GitHub workflow integration
 
 ### Editor Configuration
 
