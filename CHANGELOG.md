@@ -26,6 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Refactored package management for better organization and flexibility
 - Updated README with package module information
+- Completed migration of window manager configuration to packages
+- Completed migration of scripts to packages
+- Removed deprecated directories
 
 ### Fixed
 

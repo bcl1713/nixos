@@ -47,33 +47,34 @@ This repository contains my personal NixOS configuration for a laptop setup runn
 ├── flake.lock                     # Lock file for reproducable builds
 ├── flake.nix                      # Entry point for the configuration
 ├── profiles                       # System profiles
-│   └── personal                   # Personal profile configuration
-│       ├── configuration.nix      # Main system configuration
-│       ├── hardware-configuration.nix
-│       └── home.nix               # Home manager configuration
+│   └── personal                   # Personal profile configuration
+│       ├── configuration.nix      # Main system configuration
+│       ├── hardware-configuration.nix
+│       └── home.nix               # Home manager configuration
 └── user                           # User-specific configurations
-    ├── app                        # Application configurations
-    │   ├── firefox
-    │   ├── git
-    │   ├── kitty
-    │   ├── neovim
-    │   ├── nextcloud
-    │   └── prusa
-    ├── fonts                      # Font configuration
-    ├── packages
-    │   ├── default.nix            # Main entry point for package modules
-    │   ├── development            # Development tools
-    │   ├── media                  # Media applications
-    │   ├── system                 # System utilities
-    │   └── utilities              # General utilities
-    ├── scripts                    # Custom utility scripts
-    │   ├── battery-warning.nix    # Low battery notification service
-    │   ├── directory-combiner.nix # File combining utility
-    │   └── wifi-menu.nix          # Wofi-based WiFi selector
-    └── wm                         # Window manager (Hyprland) configuration
-        └── hyprland
-            ├── swaylock           # Swaylock configuration
-            └── waybar             # Waybar configuration
+├── app                            # Legacy application configurations (being migrated)
+│   └── neovim                     # Neovim configuration (pending migration)
+├── fonts                          # Font configuration
+├── packages                       # New modular package system
+│   ├── default.nix                # Main entry point for package modules
+│   ├── apps                       # Application configurations
+│   │   ├── browser                # Browser settings (Firefox)
+│   │   ├── creative               # Creative apps (Prusa Slicer)
+│   │   ├── development            # Development tool settings (Git)
+│   │   ├── productivity           # Productivity apps (NextCloud)
+│   │   └── terminal               # Terminal emulator (Kitty)
+│   ├── development                # Development tools and languages
+│   ├── media                      # Media applications
+│   ├── scripts                    # Utility scripts
+│   │   ├── wifi.nix               # WiFi menu script
+│   │   ├── battery.nix            # Battery notification
+│   │   └── tools.nix              # General utilities
+│   ├── system                     # System utilities
+│   ├── utilities                  # General utilities
+│   └── wm                         # Window manager configurations
+│       └── hyprland               # Hyprland configuration
+│           ├── swaylock           # Lock screen configuration
+│           └── waybar             # Status bar configuration
 ```
 
 ## 📋 Installation
@@ -307,23 +308,48 @@ nvidia-offload steam
 - **Notifications**: Mako with Catppuccin theme
 - **Other**: Prusa Slicer, various fonts
 
+## 📦 Modular Package System
+
+This configuration uses a highly modular package management system that allows for precise control over which components are enabled. Each module has its own configuration options:
+
+### Example: Browser Configuration
+
+```nix
+userPackages.apps.browser = {
+  enable = true;           # Enable browser applications
+  firefox = {
+    enable = true;         # Enable Firefox specifically
+    privacy = {
+      enable = true;       # Enable privacy enhancements
+      disableTelemetry = true;
+      disablePocket = true;
+    };
+  };
+};
+```
+
+This approach allows for granular control while maintaining a clean, organized
+structure. Most modules follow similar patterns with options to enable/disable
+specific features.
+
 ## 🔧 Customization
 
 ### Adding a New Application
 
-1. Create a new directory under `user/app/your-application/`
-2. Create a Nix file with the configuration (e.g., `your-application.nix`)
-3. Import it in your profile's `home.nix`
+1. Create a new directory under `user/packages/apps/your-application/`
+2. Create a Nix file with the configuration (e.g., `default.nix`)
+3. Import it in the appropriate parent module (e.g., `user/packages/apps/default.nix`)
+4. Enable it in your profile's configuration
 
 ### Changing the Theme
 
 The configuration uses the Catppuccin Mocha theme. To change it:
 
-1. Modify the color variables in `user/wm/hyprland/hyprland.nix`
-2. Update the Waybar theme in `user/wm/hyprland/waybar/`
-3. Change the terminal theme in `user/app/kitty/kitty.nix`
-4. Update the Neovim theme in `user/app/neovim/nvim/plugin/catppuccin.lua`
-5. Update the Mako notification theme in `user/wm/hyprland/hyprland.nix`
+1. Modify the color variables in `user/packages/wm/hyprland/hyprland.nix`
+2. Update the Waybar theme in `user/packages/wm/hyprland/waybar/`
+3. Change the terminal theme in `user/packages/apps/terminal/default.nix`
+4. Update the Neovim theme in `user/app/neovim/nvim/plugin/catppuccin.lua` (will move to packages in future)
+5. Update the Mako notification theme in `user/packages/wm/hyprland/hyprland.nix`
 
 ## 🔄 Recent Changes
 
@@ -338,7 +364,6 @@ See the [CHANGELOG.md](./CHANGELOG.md) for a detailed list of recent changes and
 - [ ] Implement password manager integration with browser support
 
 ### Refinements
-- [ ] Organize packages into logical groups (development, media, utilities)
 - [ ] Expand flake outputs to support multiple machines (desktop/laptop/server)
 - [ ] Add git hooks for linting and validating Nix code
 - [ ] Configure additional language-specific development environments
