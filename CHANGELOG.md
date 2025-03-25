@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Cliboard manager with history support for Wayland using Clipman
+- Hyprland integration for clipbaord history via Super+V
+
+### Changed
+
+### Fixed
+
 ## [0.3.0] - 2025-03-24
 
 ### Added
