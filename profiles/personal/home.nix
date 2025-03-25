@@ -4,24 +4,61 @@
 
 {
   home.username = userSettings.username;
-  home.homeDirectory = "/home/"+userSettings.username;
+  home.homeDirectory = "/home/" + userSettings.username;
+
+  nixpkgs.config.allowUnfree = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ 
-    ../../user/app/git/git.nix
-    ../../user/app/neovim/neovim.nix
-    ../../user/app/firefox/firefox.nix
-    ../../user/app/nextcloud/nextcloud.nix
-    ../../user/app/kitty/kitty.nix
-    ../../user/app/prusa/prusa.nix
-    ../../user/fonts/fonts.nix
-    ../../user/wm
-    ../../user/scripts/directory-combiner.nix
-    ../../user/scripts/wifi-menu.nix
-    ../../user/scripts/battery-warning.nix
-  ];
+  imports = [ ../../user/packages ];
+
+  userPackages = {
+
+    fonts = {
+      enable = true;
+      nerdFonts.enable = true;
+      systemFonts.enable = true;
+    };
+
+    system.enable = true;
+
+    development = {
+      enable = true;
+      nix.enable = true;
+      markdown.enable = true;
+      nodejs.enable = true;
+      python.enable = true;
+      tooling.enable = true;
+    };
+
+    media = {
+      enable = true;
+      audio.enable = true;
+      video.enable = true;
+      image.enable = true;
+    };
+
+    utilities = {
+      enable = true;
+      system.enable = true;
+      files.enable = true;
+      wayland.enable = true;
+    };
+
+    editors = {
+      enable = true;
+      neovim = {
+        enable = true;
+        plugins = {
+          enable = true;
+          lsp.enable = true;
+          git.enable = true;
+          markdown.enable = true;
+        };
+      };
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -32,14 +69,7 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
-  home.packages = with pkgs; [
-    glow
-    nodePackages.markdownlint-cli2
-  ];
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   programs.zsh = {
     enable = true;
@@ -73,7 +103,5 @@
       }
     ];
   };
-
-  programs.directory-combiner.enable = true;
 
 }

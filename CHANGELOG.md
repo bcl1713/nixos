@@ -7,21 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+## [0.3.0] - 2025-03-24
 
-- Swaylock screen locking with Catppuccin theme
-- Swayidle for automatic screen locking and power management
-- Keybinding for manual screen locking
-- Proper screen sharing support using xdg-desktop-portal-hyprland
-- NVIDIA driver support with Intel/NVIDIA hybrid graphics configuration
-- GPU diagnostic tools (glxinfo, vulkan-tools, nvtop, intel-gpu-tools)
-- NVIDIA offload script for running applications on the dedicated GPU
+### Added
+- Firefox browser configuration with privacy enhancements
+- Creative applications module with PrusaSlicer support
+- Git configuration with commit templates and hooks
+- Productivity apps with Nextcloud client integration
+- Markdown support in Neovim with zen mode and preview
+- Terminal configuration with Kitty terminal
+- Directory combiner utility script
+
+### Changed
+- Improved Hyprland configuration with Catppuccin theme
+- Enhanced Neovim configuration with better LSP support
+- Restructured module organization for better maintainability
+- Updated documentation to reflect new modules
 
 ### Fixed
-
-- PAM integrations fixed for unlock on login
-- Nextcloud Client service startup fixes
-- Swayidle wait for Hyprland to start
+- Battery warning script detection logic
+- Nextcloud client startup issues
 ## [0.2.0] - 2025-03-19
 
 ### Added

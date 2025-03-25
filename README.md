@@ -1,336 +1,159 @@
-# NixOS Configuration
+# NixOS Home-Manager Configuration
 
-> A modern, reproducible and modular NixOS configuration with Hyprland
+A modular and extensible NixOS home-manager configuration with a focus on productivity, development, and customization.
 
-![Hyprland](https://img.shields.io/badge/WM-Hyprland-blue)
-![NixOS](https://img.shields.io/badge/OS-NixOS-6ad7e5)
-![Home Manager](https://img.shields.io/badge/Tool-Home_Manager-41BDF5)
-![License](https://img.shields.io/badge/License-MIT-green)
+![Version](https://img.shields.io/badge/version-0.3.0-blue)
+![NixOS](https://img.shields.io/badge/NixOS-compatible-success)
 
-This repository contains my personal NixOS configuration for a laptop setup running Hyprland. The configuration is modular, extensible, and built with Nix flakes for reproducibility.
+## Overview
 
-## 📸 Screenshots
+This repository contains a comprehensive NixOS Home-Manager configuration structured as modular components. The configuration is designed to be easily extensible and customizable, with a focus on development tools, productivity applications, and a seamless desktop experience.
 
-- [ ] Add Screenshots
+## Features
 
-## ✨ Features
+### Applications
 
-- **Hybrid Graphics Support** with Intel/NVIDIA configuration
-  - NVIDIA offload for running specific applications on the dedicated GPU
-  - Power-efficient configuration to extend battery life
-- **Hyprland Wayland compositor** with a Catppuccin Mocha theme
-- **Proper screen sharing support** for video conferencing apps like Google Meet
-- **Home Manager** integration for user configuration
-- **Modular structure** that separates system and user configurations
-- **Full NixOS reproducibility** with flakes
-- **Neovim** configured for coding and markdown editing
-  - LSP integration with consistent keymap prefixes
-  - Telescope fuzzy finder with organized mappings
-  - Oil.nvim for file navigation
-  - Markdown tools (preview, tables, zen mode)
-  - Which-key for discoverable keybindings
-  - Git integration with gitsigns, fugitive, and diffview
-- **Waybar** with custom styling and battery indicators
-- **Firefox** with enhanced privacy settings
-- **Kitty** terminal emulator with Catppuccin theme
-- **Declarative user scripts** for enhanced workflow
-- **System optimizations**:
-  - Automatic garbage collection
-  - ZRam support for better memory management
-  - Advanced TLP settings for improved battery life
-  - Automated low battery notifications
+- **Browsers**: Firefox with privacy enhancements, telemetry disabling, and DNS-over-HTTPS
+- **Development**: Git with commit templates and hooks, VSCode, and language-specific tools
+- **Creative**: Support for creative applications like PrusaSlicer
+- **Productivity**: Nextcloud client with systemd integration
+- **Terminal**: Kitty terminal with custom font and theme
 
-## 🧱 Structure
+### Development Environment
+
+- **Languages**: Support for Nix, Node.js, Python, and Markdown
+- **Tools**: Code formatting, linting, and development utilities
+- **Git**: Comprehensive Git configuration with conventional commits
+
+### Editor Configuration
+
+- **Neovim**: Full-featured Neovim setup with:
+  - LSP (Language Server Protocol) support
+  - Code completion and snippets
+  - Git integration
+  - Markdown support with preview, zen mode, and table editing
+  - File navigation and telescope integration
+  - Syntax highlighting with Treesitter
+
+### Window Manager
+
+- **Hyprland**: Wayland compositor with:
+  - Catppuccin Mocha theme
+  - Custom keybindings
+  - Waybar integration
+  - Screen locking with swaylock and swayidle
+
+### Utilities
+
+- **Scripts**:
+  - `wifi-menu`: Interactive WiFi connection manager
+  - `battery-warning`: Low battery notification system
+  - `combine-directory`: Utility to recursively combine directory contents
+
+### System Integration
+
+- **Fonts**: Nerd Fonts integration with FiraCode
+- **Media**: Audio, video, and image tooling
+- **System Utilities**: Core system tools and integration
+
+## Structure
+
+The configuration is organized into modular components:
 
 ```
-.
-├── flake.nix                 # The entry point for the configuration
-├── flake.lock                # Lock file for reproducible builds
-├── profiles                  # System profiles
-│   └── personal              # Personal profile configuration
-│       ├── configuration.nix # Main system configuration
-│       ├── home.nix          # Home manager configuration
-│       └── hardware-configuration.nix
-└── user                      # User-specific configurations
-    ├── app                   # Application configurations
-    │   ├── firefox
-    │   ├── git
-    │   ├── kitty
-    │   ├── neovim
-    │   ├── nextcloud
-    │   └── prusa
-    ├── fonts                 # Font configuration
-    ├── scripts               # Custom utility scripts
-    │   ├── battery-warning.nix  # Low battery notification service
-    │   ├── directory-combiner.nix # File combining utility
-    │   └── wifi-menu.nix     # Wofi-based WiFi selector
-    └── wm                    # Window manager (Hyprland) configuration
-        └── hyprland
-            ├── swaylock      # Swaylock configuration
-            ├── waybar        # Waybar configuration
-            └── ...
+packages/
+├── apps/               # Application configurations
+│   ├── browser/        # Browser configurations (Firefox)
+│   ├── creative/       # Creative applications
+│   ├── development/    # Development applications
+│   ├── productivity/   # Productivity applications
+│   └── terminal/       # Terminal emulators
+├── development/        # Development environments
+├── editors/            # Editor configurations
+│   └── neovim/         # Neovim configuration and plugins
+├── fonts/              # Font configurations
+├── media/              # Media tools
+├── scripts/            # Custom scripts and utilities
+├── system/             # System configurations
+├── utilities/          # Utility packages
+└── wm/                 # Window manager configurations
+    └── hyprland/       # Hyprland configuration
 ```
 
-## 📋 Installation
+## Installation
 
-### Prerequisites
+1. Ensure you have [NixOS](https://nixos.org/) with [Home-Manager](https://github.com/nix-community/home-manager) installed
+2. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/nixos-config.git ~/.config/nixos
+   ```
+3. Import the configuration in your `home.nix`:
+   ```nix
+   {
+     imports = [ 
+       ./path/to/packages/default.nix
+     ];
+     
+     # Your other configurations...
+   }
+   ```
+4. Apply the configuration:
+   ```bash
+   home-manager switch
+   ```
 
-- NixOS installed on your system
-- Git
+## Customization
 
-### Setup
+Each module includes options that can be enabled or disabled. For example, to disable Firefox:
 
-1. Clone this repository:
+```nix
+{
+  userPackages.apps.browser.firefox.enable = false;
+}
+```
+
+Or to change Git settings:
+
+```nix
+{
+  userPackages.apps.development.git = {
+    userName = "Your Name";
+    userEmail = "your.email@example.com";
+    defaultBranch = "main";
+  };
+}
+```
+
+## Utilities
+
+### Directory Combiner
+
+A utility to recursively combine all files in a directory with headers showing relative paths.
 
 ```bash
-git clone https://github.com/yourusername/nixos-config.git ~/.dotfiles
+combine-directory [OPTIONS] <directory> [output-file]
 ```
 
-2. Build and switch to the configuration:
+Options:
+- `-a, --all`: Include hidden files and directories
+- `-h, --help`: Show help message
 
+Example:
 ```bash
-cd ~/.dotfiles
-sudo nixos-rebuild switch --flake .#nixbook
+combine-directory --all ~/projects/my-code combined-output.txt
 ```
 
-3. Apply user configuration using Home Manager:
+## Changelog
 
-```bash
-home-manager switch --flake .#brianl
-```
+See [CHANGELOG.md](./CHANGELOG.md) for a detailed history of changes.
 
-## 🚀 Usage
+## License
 
-### System Management
+[MIT](./LICENSE)
 
-- Rebuild and switch to the system configuration:
-  ```bash
-  sudo nixos-rebuild switch --flake ~/.dotfiles/
-  ```
-  or use the alias:
-  ```bash
-  nss
-  ```
+## Acknowledgements
 
-- Update Home Manager configuration:
-  ```bash
-  home-manager switch --flake ~/.dotfiles/
-  ```
-  or use the alias:
-  ```bash
-  hms
-  ```
-
-### Custom Scripts
-
-- **wifi-menu**: A Wofi-based WiFi network selector
-  ```bash
-  wifi-menu
-  ```
-
-- **directory-combiner**: Recursively combine files in a directory with headers
-  ```bash
-  combine-directory /path/to/directory output.txt
-  ```
-
-- **battery-warning**: Automatically runs in the background to monitor battery levels
-  and send notifications when battery is low
-
-### Neovim
-
-The Neovim configuration includes:
-
-- LSP support for multiple languages
-- Telescope for fuzzy finding
-- Oil.nvim for file navigation
-- Markdown-specific enhancements
-- Catppuccin color scheme
-- Custom keybindings
-- Git integration with gitsigns, fugitive, and diffview
-
-## ⌨️ Keyboard Shortcuts
-
-### Neovim
-
-My Neovim configuration uses consistent keymap prefixes to organize commands:
-
-| Prefix      | Description                                              |
-|-------------|----------------------------------------------------------|
-| `<leader>l` | LSP operations (rename, format, symbols, etc.)           |
-| `<leader>f` | File/Find operations (files, grep, buffers, etc.)        |
-| `<leader>g` | Git operations (stage, reset, diff, blame, etc.)         |
-| `<leader>m` | Markdown-specific operations (preview, tables, zen mode) |
-| `<leader>d` | Diagnostics operations                                   |
-| `<leader>b` | Buffer operations                                        |
-| `<leader>w` | Window operations                                        |
-| `<leader>e` | File explorer (oil.nvim)                                 |
-
-#### Common Keymaps
-
-| Shortcut          | Action                              |
-|-------------------|-------------------------------------|
-| `<leader><space>` | Find files                          |
-| `<leader>/`       | Search text                         |
-| `<leader>e`       | Open file explorer                  |
-| `-`               | Navigate to parent directory in Oil |
-| `<leader>w`       | Save file                           |
-| `<leader>q`       | Quit                                |
-| `<C-h/j/k/l>`     | Navigate between windows            |
-| `<leader>wv`      | Split window vertically             |
-| `<leader>ws`      | Split window horizontally           |
-
-#### LSP Keymaps
-
-| Shortcut     | Action                   |
-|--------------|--------------------------|
-| `<leader>lr` | Rename symbol            |
-| `<leader>la` | Code action              |
-| `<leader>lf` | Format document          |
-| `<leader>ls` | Document symbols         |
-| `gd`         | Go to definition         |
-| `gr`         | Find references          |
-| `K`          | Show hover documentation |
-
-#### Diagnostics
-
-| Shortcut     | Action                |
-|--------------|-----------------------|
-| `<leader>df` | Show line diagnostics |
-| `<leader>dl` | List all diagnostics  |
-| `[d`         | Previous diagnostic   |
-| `]d`         | Next diagnostic       |
-
-#### Markdown-specific
-
-| Shortcut     | Action                  |
-|--------------|-------------------------|
-| `<leader>mp` | Toggle markdown preview |
-| `<leader>mt` | Toggle table mode       |
-| `<leader>mr` | Realign tables          |
-| `<leader>mz` | Toggle zen mode         |
-| `<leader>mx` | Toggle checkbox         |
-
-#### Git Operations
-
-| Shortcut         | Action                             |
-|------------------|-----------------------------------|
-| `<leader>gs`     | Stage hunk                        |
-| `<leader>gr`     | Reset hunk                        |
-| `<leader>gS`     | Stage buffer                      |
-| `<leader>gu`     | Undo stage hunk                   |
-| `<leader>gR`     | Reset buffer                      |
-| `<leader>gp`     | Preview hunk                      |
-| `<leader>gb`     | Blame line                        |
-| `<leader>gt`     | Toggle current line blame         |
-| `<leader>gd`     | Diff against index                |
-| `<leader>gD`     | Diff against previous commit      |
-| `<leader>gcc`    | Create commit                     |
-| `<leader>gca`    | Amend commit                      |
-| `<leader>gll`    | View git log                      |
-| `<leader>glf`    | View git log for current file     |
-| `<leader>glp`    | View git log with patches         |
-| `<leader>gvd`    | Open diffview                     |
-| `<leader>gvh`    | View file history                 |
-| `<leader>gvc`    | Close diffview                    |
-| `[c`             | Jump to previous hunk             |
-| `]c`             | Jump to next hunk                 |
-
-### Hyprland
-
-| Shortcut              | Action                           |
-|-----------------------|----------------------------------|
-| `Super + Return`      | Open terminal                    |
-| `Super + C`           | Close active window              |
-| `Super + Space`       | Open application launcher (wofi) |
-| `Super + E`           | Open file manager                |
-| `Super + B`           | Open browser                     |
-| `Super + V`           | Toggle floating mode             |
-| `Super + 1-0`         | Switch to workspace 1-10         |
-| `Super + Shift + 1-0` | Move window to workspace 1-10    |
-| `Super + S`           | Toggle special workspace         |
-| `Super + h/j/k/l`     | Focus window in direction        |
-| `Super + Mouse wheel` | Cycle through workspaces         |
-| `Super + X`           | Lock screen                      |
-
-### Volume and Brightness
-
-| Shortcut             | Action                   |
-|----------------------|--------------------------|
-| `Volume Up/Down`     | Change volume by 5%      |
-| `Volume Mute`        | Toggle mute              |
-| `Brightness Up/Down` | Change brightness by 10% |
-
-### GPU Management
-
-You can run applications on the NVIDIA GPU by using the `nvidia-offload`
-command:
-
-```bash
-# Example: Run Firefox on the NVIDIA GPU
-nvidia-offload firefox
-
-# Example: run a game with NVIDIA GPU
-nvidia-offload steam
-```
-
-
-## 📦 Included Packages
-
-- **Core**: Hyprland, Waybar, kitty, wofi
-- **Applications**: Firefox, Neovim, git
-- **File Management**: nautilus
-- **Development**: Nix LSP, Lua LSP, Markdown LSP
-- **Productivity**: NextCloud client
-- **Media**: PulseAudio, PipeWire
-- **Notifications**: Mako with Catppuccin theme
-- **Other**: Prusa Slicer, various fonts
-
-## 🔧 Customization
-
-### Adding a New Application
-
-1. Create a new directory under `user/app/your-application/`
-2. Create a Nix file with the configuration (e.g., `your-application.nix`)
-3. Import it in your profile's `home.nix`
-
-### Changing the Theme
-
-The configuration uses the Catppuccin Mocha theme. To change it:
-
-1. Modify the color variables in `user/wm/hyprland/hyprland.nix`
-2. Update the Waybar theme in `user/wm/hyprland/waybar/`
-3. Change the terminal theme in `user/app/kitty/kitty.nix`
-4. Update the Neovim theme in `user/app/neovim/nvim/plugin/catppuccin.lua`
-5. Update the Mako notification theme in `user/wm/hyprland/hyprland.nix`
-
-## 🔄 Recent Changes
-
-See the [CHANGELOG.md](./CHANGELOG.md) for a detailed list of recent changes and improvements.
-
-## 📝 Todo / Future Improvements
-
-### New Features
-- [ ] Add secrets management with agenix or sops-nix
-- [ ] Implement Bluetooth management and add a Waybar applet
-- [ ] Configure a backup system using restic, borgbackup, or rsync
-- [ ] Implement password manager integration with browser support
-
-### Refinements
-- [ ] Organize packages into logical groups (development, media, utilities)
-- [ ] Expand flake outputs to support multiple machines (desktop/laptop/server)
-- [ ] Add git hooks for linting and validating Nix code
-- [ ] Configure additional language-specific development environments
-- [ ] Add media tools (mpv, audio configuration with wireplumber)
-- [ ] Configure PDF tools (viewer, editor, converter)
-- [ ] Improve documentation with comprehensive keybinding reference
-
-## 📚 Resources
-
-- [NixOS Manual](https://nixos.org/manual/nixos/stable/)
-- [Home Manager Manual](https://nix-community.github.io/home-manager/)
-- [Hyprland Wiki](https://wiki.hyprland.org/)
-- [Neovim Documentation](https://neovim.io/doc/)
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details.
+- [NixOS](https://nixos.org/)
+- [Home-Manager](https://github.com/nix-community/home-manager)
+- [Hyprland](https://hyprland.org/)
+- [Catppuccin](https://github.com/catppuccin/catppuccin)
