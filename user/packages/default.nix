@@ -3,7 +3,15 @@
 { ... }:
 
 {
-  imports =
-    [ ./system ./development ./media ./utilities ./apps ./scripts ./wm ];
+  imports = [
+    ./system
+    ./development
+    ./media
+    ./utilities
+    ./apps
+    ./scripts
+    ./wm
+    ./editors
+  ];
 
 }

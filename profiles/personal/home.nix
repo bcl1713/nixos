@@ -11,11 +11,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [
-    ../../user/app/neovim/neovim.nix
-    ../../user/fonts/fonts.nix
-    ../../user/packages
-  ];
+  imports = [ ../../user/fonts/fonts.nix ../../user/packages ];
 
   userPackages = {
     system.enable = true;
@@ -41,6 +37,19 @@
       system.enable = true;
       files.enable = true;
       wayland.enable = true;
+    };
+
+    editors = {
+      enable = true;
+      neovim = {
+        enable = true;
+        plugins = {
+          enable = true;
+          lsp.enable = true;
+          git.enable = true;
+          markdown.enable = true;
+        };
+      };
     };
   };
 
