@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added editors category to package system for better organization
 - Completed full migration of applications to packages
 - Removed deprecated directories
+- Migrated font configuration to package module structure
 
 ### Fixed
 

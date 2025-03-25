@@ -12,6 +12,7 @@
     ./scripts
     ./wm
     ./editors
+    ./fonts
   ];
 
 }

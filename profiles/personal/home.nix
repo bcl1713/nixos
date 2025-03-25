@@ -11,9 +11,16 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ ../../user/fonts/fonts.nix ../../user/packages ];
+  imports = [ ../../user/packages ];
 
   userPackages = {
+
+    fonts = {
+      enable = true;
+      nerdFonts.enable = true;
+      systemFonts.enable = true;
+    };
+
     system.enable = true;
 
     development = {
