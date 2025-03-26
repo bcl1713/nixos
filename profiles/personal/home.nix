@@ -45,6 +45,7 @@
       files.enable = true;
       wayland.enable = true;
       clipboard.enable = true;
+      rofi.enable = true;
     };
 
     editors = {

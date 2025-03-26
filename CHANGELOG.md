@@ -8,12 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Rofi application launcher with Catppuccin theme
+- Emoji picker integration with rofimoji
 - Cliboard manager with history support for Wayland using Clipman
 - Hyprland integration for clipbaord history via Super+V
 - GitHub CLI utility with aliases and shell completions
 - Output file generator script to combine directory contents and github issues
 
 ### Changed
+- Temporarily disabled wofi in favor of rofi until feature parody
 - Refactored scripts module by splitting output-generator into a separate file
 - Removed tools..nix and simplified scripts module structure
 - Improved modularity by moving script implementations to dedicated files

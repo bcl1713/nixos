@@ -6,7 +6,7 @@ with lib;
 
 let cfg = config.userPackages.utilities;
 in {
-  imports = [ ./clipboard.nix ];
+  imports = [ ./clipboard.nix ./rofi.nix ];
 
   options.userPackages.utilities = {
     enable = mkEnableOption "Enable utility tools";
