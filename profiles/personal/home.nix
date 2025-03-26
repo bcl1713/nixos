@@ -45,6 +45,7 @@
       files.enable = true;
       wayland.enable = true;
       clipboard.enable = true;
+      screenRecording.enable = true;
       rofi.enable = false;
       wofi = {
         enable = true;

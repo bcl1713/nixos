@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Output file generator script to combine directory contents and github issues
 - Emoji picker for wofi
 - Window picker for wofi
+- Screen recording functionality
 
 ### Changed
 - Temporarily disabled wofi in favor of rofi until feature parody
