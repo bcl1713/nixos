@@ -45,7 +45,15 @@
       files.enable = true;
       wayland.enable = true;
       clipboard.enable = true;
-      rofi.enable = true;
+      rofi.enable = false;
+      wofi = {
+        enable = true;
+        modes = {
+          drun.enable = true;
+          window.enable = true;
+          emoji.enable = true;
+        };
+      };
     };
 
     editors = {

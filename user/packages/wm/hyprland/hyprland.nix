@@ -42,8 +42,6 @@ in {
     settings = {
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
-      # Temporarily disabled wofi
-      "$menu" = "#wofi --show drun";
       "$browser" = "firefox";
 
       monitor = ",preferred,auto,1.6";
@@ -183,8 +181,6 @@ in {
         "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating,"
-        # Temporarily disabled wofi
-        # "$mainMod, space, exec, $menu"
         "$mainMod, P, pseudo,"
         "$mainMod, B, exec, $browser"
         "$mainMod, X, exec, lock-screen"
@@ -254,7 +250,6 @@ in {
 
   # Install packages related to Hyprland
   home.packages = with pkgs; [
-    wofi
     waybar
     hyprpaper
     swaylock
