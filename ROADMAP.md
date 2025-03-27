@@ -5,7 +5,7 @@ This document outlines the planned development for this NixOS configuration. It 
 ## v0.4.0 (In Development)
 
 ### Desktop Environment
-- [ ] Implement screen recording functionality
+- [x] Implement screen recording functionality
 - [ ] Improve screenshot tools with annotation capabilities
 - [x] Add clipboard manager with history
 
