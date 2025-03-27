@@ -47,6 +47,7 @@
       clipboard.enable = true;
       screenRecording.enable = true;
       rofi.enable = false;
+      screenshot.enable = true;
       wofi = {
         enable = true;
         modes = {
