@@ -58,6 +58,13 @@
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
+  # Lid suspend
+  services.logind = {
+    lidSwitch = "suspend";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "suspend";
+  };
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Emoji picker for wofi
 - Window picker for wofi
 - Screen recording functionality
+- Lid close suspend on battery and power, but not docked
 
 ### Changed
 - Temporarily disabled wofi in favor of rofi until feature parody
