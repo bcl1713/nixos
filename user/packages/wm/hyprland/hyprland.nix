@@ -297,10 +297,4 @@ in {
     source = ./swaylock;
     recursive = true;
   };
-
-  # Waybar configuration
-  home.file."${config.xdg.configHome}/waybar" = {
-    source = ./waybar;
-    recursive = true;
-  };
 }
