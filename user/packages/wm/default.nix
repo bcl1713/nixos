@@ -6,7 +6,7 @@ with lib;
 
 let cfg = config.userPackages.wm;
 in {
-  imports = [ ./hyprland.nix ];
+  imports = [ ./hyprland.nix ./waybar.nix ];
 
   options.userPackages.wm = {
     enable = mkOption {
@@ -54,6 +54,7 @@ in {
         };
       };
     };
+
   };
 
   config = mkIf cfg.enable {

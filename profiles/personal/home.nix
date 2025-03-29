@@ -15,6 +15,16 @@
 
   userPackages = {
 
+    wm = {
+      enable = true;
+      hyprland = {
+        enable = true;
+        swaylock.enable = true;
+        swayidle.enable = true;
+      };
+      waybar.enable = true;
+    };
+
     fonts = {
       enable = true;
       nerdFonts.enable = true;
@@ -48,6 +58,12 @@
       screenRecording.enable = true;
       rofi.enable = false;
       screenshot.enable = true;
+      powerManagement = {
+        enable = true;
+        defaultProfile = "balanced";
+        keybinding = "SUPER, F7";
+        indicator.enable = true;
+      };
       wofi = {
         enable = true;
         modes = {

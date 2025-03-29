@@ -12,6 +12,7 @@ in {
     ./wofi.nix
     ./screen-recording.nix
     ./screenshot.nix
+    ./power-management.nix
   ];
 
   options.userPackages.utilities = {
