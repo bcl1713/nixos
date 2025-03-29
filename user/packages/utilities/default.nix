@@ -13,6 +13,7 @@ in {
     ./screen-recording.nix
     ./screenshot.nix
     ./power-management.nix
+    ./bitwarden.nix
   ];
 
   options.userPackages.utilities = {
