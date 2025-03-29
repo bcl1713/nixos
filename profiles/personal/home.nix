@@ -58,6 +58,7 @@
       screenRecording.enable = true;
       rofi.enable = false;
       screenshot.enable = true;
+      bitwarden.enable = true;
       powerManagement = {
         enable = true;
         defaultProfile = "balanced";
