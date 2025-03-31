@@ -34,7 +34,7 @@ in {
 
         # Default values
         INCLUDE_HIDDEN=0
-        MILESTONE="v0.4.0"
+        MILESTONE=""
         OUTPUT_FILE="output.txt"
 
         # Parse command line arguments
