@@ -14,6 +14,12 @@
   imports = [ ../../user/packages ];
 
   userPackages = {
+    security = {
+      secrets = {
+        enable = true;
+        age.enable = true;
+      };
+    };
 
     wm = {
       enable = true;

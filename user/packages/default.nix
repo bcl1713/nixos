@@ -13,6 +13,7 @@
     ./wm
     ./editors
     ./fonts
+    ./security
   ];
 
 }

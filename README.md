@@ -60,6 +60,9 @@ This repository contains a comprehensive NixOS Home-Manager configuration struct
 - **Fonts**: Nerd Fonts integration with FiraCode
 - **Media**: Audio, video, and image tooling
 - **System Utilities**: Core system tools and integration
+- **Security**:
+  - Secrets management with sops-nix for secure credential storage
+  - Support for age and GPG encryption backends
 
 ## Structure
 
