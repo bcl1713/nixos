@@ -58,7 +58,21 @@
 
     utilities = {
       enable = true;
-      system.enable = true;
+      system = {
+        enable = true;
+        monitoring = {
+          enable = true;
+          topTools.enable = true;
+          graphical.enable = true;
+          waybar = {
+            enable = true;
+            cpu.enable = true;
+            memory.enable = true;
+            disk.enable = true;
+            temperature.enable = true;
+          };
+        };
+      };
       files.enable = true;
       wayland.enable = true;
       clipboard.enable = true;

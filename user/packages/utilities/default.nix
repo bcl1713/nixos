@@ -14,22 +14,22 @@ in {
     ./screenshot.nix
     ./power-management.nix
     ./bitwarden.nix
+    ./system-monitoring.nix # Add the new module here
   ];
 
   options.userPackages.utilities = {
     enable = mkEnableOption "Enable utility tools";
 
-    system = { enable = mkEnableOption "Enable system monitoring tools"; };
+    system = { enable = mkEnableOption "Enable system utilities"; };
 
     files = { enable = mkEnableOption "Enable file management tools"; };
 
     wayland = { enable = mkEnableOption "Enable Wayland-specific utilities"; };
-
   };
 
   config = mkMerge [
     (mkIf (cfg.enable && cfg.system.enable) {
-      home.packages = with pkgs; [ htop btop brightnessctl ];
+      home.packages = with pkgs; [ brightnessctl ];
     })
 
     (mkIf (cfg.enable && cfg.files.enable) {
