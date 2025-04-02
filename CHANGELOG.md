@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- System resource monitoring with CPU, memory, disk, and temperature metrics
+- Waybar integration for monitoring system resources with Nerd Font icons
+- Terminal-based monitoring tools (htop, btop, bottom)
+- Graphical monitoring tools (gnome-system-monitor, glances)
+- `system-stats` command for quick terminal-based system overview
 - Rofi application launcher with Catppuccin theme
 - Emoji picker integration with rofimoji
 - Cliboard manager with history support for Wayland using Clipman
