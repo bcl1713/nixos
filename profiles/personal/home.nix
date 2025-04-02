@@ -1,6 +1,6 @@
 # profiles/personal/home.nix
 
-{ pkgs, userSettings, ... }:
+{ pkgs, userSettings, inputs, ... }:
 
 {
   home.username = userSettings.username;
@@ -11,7 +11,14 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ ../../user/packages ];
+  imports = [ ../../user/packages inputs.agenix.homeManagerModules.default ];
+
+  age = {
+    identityPaths = [ "/home/${userSettings.username}/.ssh/id_ed25519" ];
+    secrets = {
+      personal-email = { file = ../../secrets/personal-email.age; };
+    };
+  };
 
   userPackages = {
 
