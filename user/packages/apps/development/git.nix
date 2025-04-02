@@ -21,8 +21,9 @@ in {
 
     userEmail = mkOption {
       type = types.str;
-      default = "bcl1713@gmail.com";
-      description = "Git user email";
+      description =
+        "Git user email. If not specified, uses the content of the personal-email secret.";
+      default = "";
     };
 
     defaultBranch = mkOption {
@@ -50,10 +51,27 @@ in {
       nodejs # Ensure nodejs is available for hooks
     ];
 
+    # Create a script to set git email from the secret file if userEmail is not specified
+    home.activation.setGitEmail = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      if [[ -z "${cfg.userEmail}" && -n "${
+        if config.age.secrets ? personal-email then
+          config.age.secrets.personal-email.path
+        else
+          ""
+      }" ]]; then
+        # User hasn't specified an email and the secret exists
+        EMAIL=$(cat "${config.age.secrets.personal-email.path}")
+        $DRY_RUN_CMD ${pkgs.git}/bin/git config --global user.email "$EMAIL"
+      elif [[ -n "${cfg.userEmail}" ]]; then
+        # User explicitly set an email, use that 
+        $DRY_RUN_CMD ${pkgs.git}/bin/git config --global user.email "${cfg.userEmail}"
+      fi
+    '';
+
     programs.git = {
       enable = true;
       userName = cfg.userName;
-      userEmail = cfg.userEmail;
+      # Don't set userEmail here as it will be handled by the activation script
       extraConfig = {
         init.defaultBranch = cfg.defaultBranch;
         pull.rebase = true;

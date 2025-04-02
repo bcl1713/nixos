@@ -5,6 +5,7 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./secrets.nix
   ];
 
   # NVIDIA modules
@@ -63,6 +64,16 @@
     lidSwitch = "suspend";
     lidSwitchDocked = "ignore";
     lidSwitchExternalPower = "suspend";
+  };
+
+  # SSH
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
   };
 
   xdg.portal = {
@@ -143,6 +154,8 @@
     nautilus
     gnome-keyring
     libsecret
+
+    inputs.agenix.packages.${pkgs.system}.default
 
     #GPU tools
     glxinfo
