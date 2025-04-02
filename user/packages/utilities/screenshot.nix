@@ -9,59 +9,74 @@ let
 
   # Create script for screenshots without clipboard functionality
   screenshotScript = pkgs.writeShellScriptBin "take-screenshot" ''
-    #!/usr/bin/env bash
+            #!/usr/bin/env bash
 
-    # Configuration
-    SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"
-    TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
-    SCREENSHOT_FILE="$SCREENSHOTS_DIR/screenshot_$TIMESTAMP.png"
+            # Configuration
+            SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"
+            TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+            SCREENSHOT_FILE="$SCREENSHOTS_DIR/screenshot_$TIMESTAMP.png"
 
-    # Create screenshots directory if it doesn't exist
-    mkdir -p "$SCREENSHOTS_DIR"
+            # Create screenshots directory if it doesn't exist
+            mkdir -p "$SCREENSHOTS_DIR"
 
-    # Function to take and save screenshot
-    capture_screenshot() {
-      local mode=$1
-      local file="$SCREENSHOT_FILE"
-      
-      # Take screenshot based on mode
-      case "$mode" in
-        "area")
-          ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" "$file"
-          ;;
-        "window")
-          # Get active window geometry from Hyprland
-          WINDOW_GEOMETRY=$(${pkgs.hyprland}/bin/hyprctl activewindow -j | 
-                            ${pkgs.jq}/bin/jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
-          ${pkgs.grim}/bin/grim -g "$WINDOW_GEOMETRY" "$file"
-          ;;
-        "screen")
-          ${pkgs.grim}/bin/grim "$file"
-          ;;
-        *)
-          ${pkgs.libnotify}/bin/notify-send -t 3000 -i dialog-error "Screenshot" "Invalid mode: $mode"
-          exit 1
-          ;;
-      esac
-      
-      # Check if screenshot was successful
-      if [ ! -f "$file" ]; then
-        ${pkgs.libnotify}/bin/notify-send -t 3000 -i dialog-error "Screenshot" "Failed to take screenshot"
-        exit 1
-      fi
-      
-      # Open with swappy for annotation if requested
-      if [ "$2" == "annotate" ]; then
-        ${pkgs.swappy}/bin/swappy -f "$file" -o "$file"
-        ${pkgs.libnotify}/bin/notify-send -t 3000 -i camera "Screenshot" "Annotated screenshot saved to $file"
-      else
-        ${pkgs.libnotify}/bin/notify-send -t 3000 -i camera "Screenshot" "Screenshot saved to $file"
-      fi
-    }
+            # Function to take and save screenshot
+        capture_screenshot() {
+          local mode=$1
+          local file="$SCREENSHOT_FILE"
+          local clipboard=$3  # New parameter for clipboard support
+          
+          # Take screenshot based on mode
+          case "$mode" in
+            "area")
+              ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" "$file"
+              ;;
+            "window")
+              # Get active window geometry from Hyprland
+              WINDOW_GEOMETRY=$(${pkgs.hyprland}/bin/hyprctl activewindow -j | 
+                              ${pkgs.jq}/bin/jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+              ${pkgs.grim}/bin/grim -g "$WINDOW_GEOMETRY" "$file"
+              ;;
+            "screen")
+              ${pkgs.grim}/bin/grim "$file"
+              ;;
+            *)
+              ${pkgs.libnotify}/bin/notify-send -t 3000 -i dialog-error "Screenshot" "Invalid mode: $mode"
+              exit 1
+              ;;
+          esac
+          
+          # Check if screenshot was successful
+          if [ ! -f "$file" ]; then
+            ${pkgs.libnotify}/bin/notify-send -t 3000 -i dialog-error "Screenshot" "Failed to take screenshot"
+            exit 1
+          fi
+          
+          # Copy to clipboard if requested
+          if [ "$clipboard" = "clipboard" ]; then
+            ${pkgs.wl-clipboard}/bin/wl-copy --type image/png < "$file"
+            ${pkgs.libnotify}/bin/notify-send -t 3000 -i camera "Screenshot" "Copied to clipboard and saved to $file"
+          fi
+          
+          # Open with swappy for annotation if requested
+          if [ "$2" == "annotate" ]; then
+            ${pkgs.swappy}/bin/swappy -f "$file" -o "$file"
+            
+            # Copy to clipboard after annotation if requested
+            if [ "$clipboard" = "clipboard" ]; then
+              ${pkgs.wl-clipboard}/bin/wl-copy --type image/png < "$file"
+              ${pkgs.libnotify}/bin/notify-send -t 3000 -i camera "Screenshot" "Annotated screenshot copied to clipboard and saved to $file"
+            else
+              ${pkgs.libnotify}/bin/notify-send -t 3000 -i camera "Screenshot" "Annotated screenshot saved to $file"
+            fi
+          elif [ "$clipboard" != "clipboard" ]; then
+            ${pkgs.libnotify}/bin/notify-send -t 3000 -i camera "Screenshot" "Screenshot saved to $file"
+          fi
+        }
 
-    # Parse arguments
-    MODE="screen"  # Default to full screen
-    ANNOTATE=""    # Default is not to annotate
+            # Parse arguments
+            MODE="screen"  # Default to full screen
+            ANNOTATE=""    # Default is not to annotate
+            CLIPBOARD=""
 
     while [[ $# -gt 0 ]]; do
       case "$1" in
@@ -73,15 +88,18 @@ let
           ANNOTATE="annotate"
           shift
           ;;
+        "clipboard")
+          CLIPBOARD="clipboard"
+          shift
+          ;;
         *)
           ${pkgs.libnotify}/bin/notify-send -t 3000 -i dialog-error "Screenshot" "Unknown argument: $1"
           exit 1
           ;;
       esac
     done
-
-    # Capture and save screenshot
-    capture_screenshot "$MODE" "$ANNOTATE"
+            # Capture and save screenshot
+            capture_screenshot "$MODE" "$ANNOTATE"
   '';
 in {
   options.userPackages.utilities.screenshot = {
