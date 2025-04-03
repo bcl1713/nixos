@@ -16,6 +16,7 @@ in {
     ./bitwarden.nix
     ./system-monitoring.nix
     ./system-updates.nix
+    ./disk-usage.nix
   ];
 
   options.userPackages.utilities = {
