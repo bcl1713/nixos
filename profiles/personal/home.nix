@@ -58,6 +58,13 @@
 
     utilities = {
       enable = true;
+      diskUsage = {
+        enable = true;
+        interactiveTools.enable = true;
+        graphicalTools.enable = true;
+        duplicateFinder.enable = true;
+        cleanupTools.enable = true;
+      };
       system = {
         enable = true;
         monitoring = {
