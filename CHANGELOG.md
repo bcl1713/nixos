@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Enhanced system update management with Home Manager integration
+- Unified update command for bot NixOS and Home Manager
+- Configurable update notifications system
+- Maintenance utilities including automatic garbage collection
+- Convenient shell aliases for system updates
+- Documentation for update system
 - System resource monitoring with CPU, memory, disk, and temperature metrics
 - Waybar integration for monitoring system resources with Nerd Font icons
 - Terminal-based monitoring tools (htop, btop, bottom)
@@ -27,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bitwarden password manager integration with desktop app and CLI tools
 
 ### Changed
+- Reorganized system update logic to work with existing system.autoUpgrade
+settings
 - Temporarily disabled wofi in favor of rofi until feature parody
 - Refactored scripts module by splitting output-generator into a separate file
 - Removed tools..nix and simplified scripts module structure

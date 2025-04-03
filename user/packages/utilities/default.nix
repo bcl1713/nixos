@@ -14,7 +14,8 @@ in {
     ./screenshot.nix
     ./power-management.nix
     ./bitwarden.nix
-    ./system-monitoring.nix # Add the new module here
+    ./system-monitoring.nix
+    ./system-updates.nix
   ];
 
   options.userPackages.utilities = {
