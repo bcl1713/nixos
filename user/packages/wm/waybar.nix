@@ -1,5 +1,5 @@
 # user/packages/wm/waybar.nix
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 

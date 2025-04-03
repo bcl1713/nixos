@@ -48,7 +48,7 @@ in {
 
       # Autostart programs
       "exec-once" = [
-        "waybar & hyprpaper"
+        "hyprpaper"
         "mako"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hprland"
       ];
