@@ -80,12 +80,31 @@
       rofi.enable = false;
       screenshot.enable = true;
       bitwarden.enable = true;
+      systemUpdates = {
+        enable = true;
+        homeManager = { enable = true; };
+        system = { allowReboot = false; };
+        notifications = {
+          enable = true;
+          beforeUpdate = true;
+          afterUpdate = true;
+        };
+        maintenance = {
+          garbageCollection = {
+            enable = true;
+            maxAge = 30;
+            frequency = "weekly";
+          };
+          optimizeStore = true;
+        };
+      };
       powerManagement = {
         enable = true;
         defaultProfile = "balanced";
         keybinding = "SUPER, F7";
         indicator.enable = true;
       };
+
       wofi = {
         enable = true;
         modes = {
