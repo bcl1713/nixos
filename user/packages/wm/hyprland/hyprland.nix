@@ -127,7 +127,6 @@ in {
 
       # Window rules
       windowrulev2 = [
-        "fullscreenstate 0 2,class:(firefox)"
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];

@@ -32,64 +32,60 @@ let
     mantle = "rgb(181825)";
     crust = "rgb(11111b)";
   };
-in
-{
+in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;
-    
+
     # Convert the hyprland.conf to Nix format
     settings = {
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
       "$menu" = "wofi --show drun";
       "$browser" = "firefox";
-      
+
       monitor = ",preferred,auto,1.6";
-      
+
       # Autostart programs
       "exec-once" = [
         "waybar & hyprpaper"
         "mako"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hprland"
       ];
-      
+
       # Environment variables
-      env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
-      ];
-      
+      env = [ "XCURSOR_SIZE,24" "HYPRCURSOR_SIZE,24" ];
+
       # General settings
       general = {
         border_size = 4;
-        
+
         "col.active_border" = "${colors.blue} ${colors.green} 90deg";
         "col.inactive_border" = colors.subtext0;
-        
+
         gaps_in = 8;
         gaps_out = 16;
-        
+
         resize_on_border = true;
         allow_tearing = false;
-        
+
         layout = "dwindle";
       };
-      
+
       # Decoration settings
       decoration = {
         rounding = 4;
-        
+
         blur = {
           enabled = true;
           size = 3;
           passes = 1;
         };
-        
+
         active_opacity = 1.0;
         inactive_opacity = 0.8;
-        
+
         shadow = {
           enabled = true;
           range = 4;
@@ -97,11 +93,11 @@ in
           color = "rgba(1a1a1aee)";
         };
       };
-      
+
       # Animation settings
       animations = {
         enabled = true;
-        
+
         bezier = [
           "easeOutQuint,0.23,1,0.32,1"
           "easeInOutCubic,0.65,0.05,0.36,1"
@@ -109,7 +105,7 @@ in
           "almostLinear,0.5,0.5,0.75,1.0"
           "quick,0.15,0,0.1,1"
         ];
-        
+
         animation = [
           "global, 1, 10, default"
           "border, 1, 5.39, easeOutQuint"
@@ -129,24 +125,21 @@ in
           "workspacesOut, 1, 1.94, almostLinear, fade"
         ];
       };
-      
+
       # Window rules
       windowrulev2 = [
-        "fullscreenstate 0 2,class:(firefox)"
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
-      
+
       # Layout settings
       dwindle = {
         pseudotile = true;
         preserve_split = true;
       };
-      
-      master = {
-        new_status = "master";
-      };
-      
+
+      master = { new_status = "master"; };
+
       # Misc settings
       misc = {
         force_default_wallpaper = 0;
@@ -154,7 +147,7 @@ in
         disable_hyprland_logo = true;
         key_press_enables_dpms = true;
       };
-      
+
       # Input settings
       input = {
         kb_layout = "us";
@@ -162,30 +155,26 @@ in
         kb_model = "";
         kb_options = "";
         kb_rules = "";
-        
+
         follow_mouse = 1;
-        
+
         sensitivity = 0;
-        
-        touchpad = {
-          natural_scroll = false;
-        };
+
+        touchpad = { natural_scroll = false; };
       };
-      
+
       # Gesture settings
-      gestures = {
-        workspace_swipe = false;
-      };
-      
+      gestures = { workspace_swipe = false; };
+
       # Device-specific settings
       device = {
         name = "epic-mouse-v1";
         sensitivity = -0.5;
       };
-      
+
       # Keybindings
       "$mainMod" = "SUPER";
-      
+
       bind = [
         "$mainMod, return, exec, $terminal"
         "$mainMod, C, killactive,"
@@ -196,13 +185,13 @@ in
         "$mainMod, P, pseudo,"
         "$mainMod, B, exec, $browser"
         "$mainMod, X, exec, lock-screen"
-        
+
         # Movement keys
         "$mainMod, h, movefocus, l"
         "$mainMod, j, movefocus, d"
         "$mainMod, k, movefocus, u"
         "$mainMod, l, movefocus, r"
-        
+
         # Workspace switching
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
@@ -214,7 +203,7 @@ in
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, workspace, 10"
-        
+
         # Move windows to workspace
         "$mainMod SHIFT, 1, movetoworkspace, 1"
         "$mainMod SHIFT, 2, movetoworkspace, 2"
@@ -226,21 +215,21 @@ in
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
-        
+
         # Special workspace
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
-        
+
         # Scroll through workspaces
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
       ];
-      
+
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-      
+
       # Media key bindings
       bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
@@ -250,7 +239,7 @@ in
         ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
         ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
       ];
-      
+
       bindl = [
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPause, exec, playerctl play-pause"
