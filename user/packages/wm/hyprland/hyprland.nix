@@ -221,6 +221,9 @@ in {
         # Scroll through workspaces
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+
+        # Fake Fullscreen
+        "$mainMod, F, fullscreenstate, 0 2"
       ];
 
       bindm = [
