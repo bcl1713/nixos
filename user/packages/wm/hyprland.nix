@@ -10,7 +10,6 @@ in {
   imports = [ ./hyprland/hyprland.nix ./hyprland/swayidle.nix ];
 
   config = mkIf cfg.enable {
-    # Hyprland configuration is imported directly, nothing to configure here
 
     # Configure swayidle if enabled
     services.swayidle = mkIf cfg.swayidle.enable {

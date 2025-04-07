@@ -4,14 +4,9 @@
 
 with lib;
 
-let 
-  cfg = config.userPackages.scripts;
+let cfg = config.userPackages.scripts;
 in {
-  imports = [
-    ./wifi.nix
-    ./battery.nix
-    ./tools.nix
-  ];
+  imports = [ ./wifi.nix ./battery.nix ./directory-combiner.nix ./output-generator.nix ];
 
   options.userPackages.scripts = {
     enable = mkOption {
@@ -19,7 +14,7 @@ in {
       default = true;
       description = "Whether to enable custom scripts";
     };
-    
+
     wifi = {
       enable = mkOption {
         type = types.bool;
@@ -27,40 +22,40 @@ in {
         description = "Whether to enable WiFi menu script";
       };
     };
-    
+
     battery = {
       enable = mkOption {
         type = types.bool;
         default = true;
         description = "Whether to enable battery warning script";
       };
-      
+
       lowThreshold = mkOption {
         type = types.int;
         default = 15;
         description = "Battery percentage to trigger low battery warning";
       };
-      
+
       criticalThreshold = mkOption {
         type = types.int;
         default = 5;
         description = "Battery percentage to trigger critical battery warning";
       };
     };
-    
-    tools = {
+
+    directoryCombiner = {
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Whether to enable utility tools";
+        description = "Whether to enable directory combiner tool";
       };
-      
-      directoryCombiner = {
-        enable = mkOption {
-          type = types.bool;
-          default = true;
-          description = "Whether to enable directory combiner tool";
-        };
+    };
+
+    outputGenerator = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Whether to enable output file generator script";
       };
     };
   };

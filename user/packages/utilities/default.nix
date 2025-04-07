@@ -6,10 +6,23 @@ with lib;
 
 let cfg = config.userPackages.utilities;
 in {
+  imports = [
+    ./clipboard.nix
+    ./rofi.nix
+    ./wofi.nix
+    ./screen-recording.nix
+    ./screenshot.nix
+    ./power-management.nix
+    ./bitwarden.nix
+    ./system-monitoring.nix
+    ./system-updates.nix
+    ./disk-usage.nix
+  ];
+
   options.userPackages.utilities = {
     enable = mkEnableOption "Enable utility tools";
 
-    system = { enable = mkEnableOption "Enable system monitoring tools"; };
+    system = { enable = mkEnableOption "Enable system utilities"; };
 
     files = { enable = mkEnableOption "Enable file management tools"; };
 
@@ -18,7 +31,7 @@ in {
 
   config = mkMerge [
     (mkIf (cfg.enable && cfg.system.enable) {
-      home.packages = with pkgs; [ htop btop brightnessctl ];
+      home.packages = with pkgs; [ brightnessctl ];
     })
 
     (mkIf (cfg.enable && cfg.files.enable) {

@@ -6,6 +6,7 @@ with lib;
 
 let cfg = config.userPackages.development;
 in {
+  imports = [ ./github.nix ];
   options.userPackages.development = {
     enable = mkEnableOption "Enable development tools";
 

@@ -1,15 +1,14 @@
+# user/packages/scripts/directory-combiner.nix
+
 { config, lib, pkgs, ... }:
 
 with lib;
 
-let cfg = config.programs.directory-combiner;
+let cfg = config.userPackages.scripts.directoryCombiner;
 in {
-  options.programs.directory-combiner = {
-    enable = mkEnableOption "directory combiner utility";
-
-    package = mkOption {
-      type = types.package;
-      default = pkgs.writeShellScriptBin "combine-directory" ''
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      (writeShellScriptBin "combine-directory" ''
         #!/usr/bin/env bash
 
         # combine-directory: Recursively combines all files in a directory
@@ -161,21 +160,8 @@ in {
         else
           process_files "$TARGET_DIR" ""
         fi
-      '';
-      description = "The package providing the directory combiner utility";
-    };
-
-    extraOptions = mkOption {
-      type = types.attrs;
-      default = { };
-      description = "Extra options to pass to the directory combiner script";
-    };
-  };
-
-  config = mkIf cfg.enable {
-    home.packages = [
-      cfg.package
-      pkgs.file # Add dependency on the 'file' command
+      '')
+      file # Add dependency on the 'file' command
     ];
 
     # Create a simple wrapper with documentation

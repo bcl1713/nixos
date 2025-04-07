@@ -1,6 +1,6 @@
 # profiles/personal/home.nix
 
-{ pkgs, userSettings, ... }:
+{ pkgs, userSettings, inputs, ... }:
 
 {
   home.username = userSettings.username;
@@ -11,9 +11,26 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ ../../user/packages ];
+  imports = [ ../../user/packages inputs.agenix.homeManagerModules.default ];
+
+  age = {
+    identityPaths = [ "/home/${userSettings.username}/.ssh/id_ed25519" ];
+    secrets = {
+      personal-email = { file = ../../secrets/personal-email.age; };
+    };
+  };
 
   userPackages = {
+
+    wm = {
+      enable = true;
+      hyprland = {
+        enable = true;
+        swaylock.enable = true;
+        swayidle.enable = true;
+      };
+      waybar.enable = true;
+    };
 
     fonts = {
       enable = true;
@@ -41,9 +58,68 @@
 
     utilities = {
       enable = true;
-      system.enable = true;
+      diskUsage = {
+        enable = true;
+        interactiveTools.enable = true;
+        graphicalTools.enable = true;
+        duplicateFinder.enable = true;
+        cleanupTools.enable = true;
+      };
+      system = {
+        enable = true;
+        monitoring = {
+          enable = true;
+          topTools.enable = true;
+          graphical.enable = true;
+          waybar = {
+            enable = true;
+            cpu.enable = true;
+            memory.enable = true;
+            disk.enable = true;
+            temperature.enable = true;
+          };
+        };
+      };
       files.enable = true;
       wayland.enable = true;
+      clipboard.enable = true;
+      screenRecording.enable = true;
+      rofi.enable = false;
+      screenshot.enable = true;
+      bitwarden.enable = true;
+      systemUpdates = {
+        enable = true;
+        homeManager = { enable = true; };
+        system = { allowReboot = false; };
+        notifications = {
+          enable = true;
+          beforeUpdate = true;
+          afterUpdate = true;
+        };
+        maintenance = {
+          garbageCollection = {
+            enable = true;
+            maxAge = 30;
+            frequency = "weekly";
+          };
+          optimizeStore = true;
+        };
+      };
+      powerManagement = {
+        enable = true;
+        defaultProfile = "balanced";
+        keybinding = "SUPER, F7";
+        indicator.enable = true;
+      };
+
+      wofi = {
+        enable = true;
+        modes = {
+          drun.enable = true;
+          window.enable = true;
+          emoji.enable = true;
+        };
+      };
     };
 
     editors = {

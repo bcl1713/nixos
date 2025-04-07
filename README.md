@@ -24,6 +24,7 @@ This repository contains a comprehensive NixOS Home-Manager configuration struct
 - **Languages**: Support for Nix, Node.js, Python, and Markdown
 - **Tools**: Code formatting, linting, and development utilities
 - **Git**: Comprehensive Git configuration with conventional commits
+- **GitHub**: CLI utility for GitHub workflow integration
 
 ### Editor Configuration
 
@@ -49,6 +50,10 @@ This repository contains a comprehensive NixOS Home-Manager configuration struct
   - `wifi-menu`: Interactive WiFi connection manager
   - `battery-warning`: Low battery notification system
   - `combine-directory`: Utility to recursively combine directory contents
+  = `update-output-file`: Script to generate output file with directory contents
+  and github issues
+- **Clipboard Management**:
+  - Clipboard history with Clipman integration
 
 ### System Integration
 
