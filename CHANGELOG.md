@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Wiki for advanced topics and usage information
 - Disk usage analysis and management tools
 - Enhanced system update management with Home Manager integration
 - Unified update command for bot NixOS and Home Manager
