@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Wiki for advanced topics and usage information
+- Configuration Basics
+- Comprehensive documentation for all configuration options
+- Configuration examples for common use cases
 - Disk usage analysis and management tools
 - Enhanced system update management with Home Manager integration
 - Unified update command for bot NixOS and Home Manager
