@@ -6,11 +6,15 @@
   home.username = userSettings.username;
   home.homeDirectory = "/home/" + userSettings.username;
 
+  # Allow installation of unfree packages via Home Manager.
   nixpkgs.config.allowUnfree = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # Import custom modules defined in user/packages/
+  # These modules use the standard NixOS module system (mkOption, mkIf)
+  # to allow enabling/disabling groups of packages and configurations.
   imports = [ ../../user/packages inputs.agenix.homeManagerModules.default ];
 
   age = {
@@ -159,6 +163,8 @@
       theme = "agnoster";
     };
     plugins = [
+      # Fetch Zsh plugins directly from GitHub using specific revisions.
+      # Consider using flake inputs for these if stable versions are available.
       {
         name = "zsh-autosuggestions";
         src = pkgs.fetchFromGitHub {
