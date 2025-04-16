@@ -158,9 +158,15 @@
     wget
     git
     nautilus
+
+    # PKI
+    opensc
+    pcsclite
+    pcsctools
+
+    # Secrets Management
     gnome-keyring
     libsecret
-
     inputs.agenix.packages.${pkgs.system}.default
 
     #GPU tools
@@ -199,6 +205,7 @@
       STOP_CHARGE_THRESH_BAT0 = 90;
     };
   };
+  services.pcscd.enable = true;
 
   # Automatic security updates
   system.autoUpgrade = {
