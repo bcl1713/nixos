@@ -44,7 +44,7 @@ in {
       "$fileManager" = "nautilus";
       "$browser" = "firefox";
 
-      monitor = ",preferred,auto,1.6";
+      monitor = [ "eDP-1,preferred,auto,1.6" "DP-1,preferred,auto,1" ];
 
       # Autostart programs
       "exec-once" = [
