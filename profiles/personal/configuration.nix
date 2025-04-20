@@ -77,6 +77,13 @@
     };
   };
 
+  # Tailscale VPN
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+    useRoutingFeatures = "client";
+  };
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -175,6 +182,9 @@
     pciutils
     nvtopPackages.full
     intel-gpu-tools
+
+    # Tailscale
+    tailscale
 
     (writeShellScriptBin "nvidia-offload" ''
       export __NV_PRIME_RENDER_OFFLOAD=1

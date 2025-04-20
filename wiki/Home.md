@@ -28,6 +28,7 @@ Dive deeper into specific areas:
 - [Neovim Setup](./Neovim-Setup): Detailed information about the included Neovim configuration
 - [Development Environment](./Development-Environment): Tools and setup for development workflows
 - [Update Management](./Update-Management): How the system update process works
+- [Tailscale Configuration](./Tailscale-Configuration): Using and configuring Tailscale VPN
 
 ## Troubleshooting
 

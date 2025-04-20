@@ -1,6 +1,6 @@
 # profiles/personal/home.nix
 
-{ pkgs, userSettings, inputs, ... }:
+{ config, pkgs, userSettings, inputs, ... }:
 
 {
   home.username = userSettings.username;
@@ -21,11 +21,11 @@
     identityPaths = [ "/home/${userSettings.username}/.ssh/id_ed25519" ];
     secrets = {
       personal-email = { file = ../../secrets/personal-email.age; };
+      tailscale-auth-key = { file = ../../secrets/tailscale-auth-key.age; };
     };
   };
 
   userPackages = {
-
     wm = {
       enable = true;
       hyprland = {
@@ -91,6 +91,15 @@
       rofi.enable = false;
       screenshot.enable = true;
       bitwarden.enable = true;
+      tailscale = {
+        enable = true;
+        autoConnect = {
+          enable = true;
+          authKeyFile = config.age.secrets.tailscale-auth-key.path;
+        };
+        acceptRoutes = true;
+        waybar.enable = true;
+      };
       systemUpdates = {
         enable = true;
         homeManager = { enable = true; };
@@ -185,5 +194,4 @@
       }
     ];
   };
-
 }
