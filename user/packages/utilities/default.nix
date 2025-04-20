@@ -17,6 +17,7 @@ in {
     ./system-monitoring.nix
     ./system-updates.nix
     ./disk-usage.nix
+    ./tailscale.nix
   ];
 
   options.userPackages.utilities = {

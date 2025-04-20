@@ -145,6 +145,18 @@ Options for system utilities and tools.
 | `userPackages.utilities.bitwarden.cli.enable` | boolean | `true` | Enable Bitwarden CLI |
 | `userPackages.utilities.bitwarden.cli.addShellAliases` | boolean | `true` | Add helpful shell aliases for Bitwarden |
 
+### Tailscale VPN
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `userPackages.utilities.tailscale.enable` | boolean | `false` | Enable Tailscale VPN client |
+| `userPackages.utilities.tailscale.autoConnect.enable` | boolean | `true` | Automatically connect to Tailscale on startup |
+| `userPackages.utilities.tailscale.autoConnect.authKeyFile` | string | `""` | Path to the file containing the Tailscale auth key |
+| `userPackages.utilities.tailscale.useExitNode` | boolean | `false` | Whether to use an exit node for all traffic |
+| `userPackages.utilities.tailscale.exitNode` | string | `""` | Hostname of the exit node to use |
+| `userPackages.utilities.tailscale.acceptRoutes` | boolean | `true` | Whether to accept routes from other tailnet nodes |
+| `userPackages.utilities.tailscale.waybar.enable` | boolean | `true` | Whether to add Tailscale status indicator to waybar |
+
 ## Applications
 
 Options for applications and their configurations.

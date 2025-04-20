@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+
+- Tailscale VPN integration with automatic connection
+- Agenix secret management for Tailscale auth key
+- Waybar status indicator for Tailscale
+- Command-line utilities for managing Tailscale connection
+- Documentation for Tailscale configuration and usage
 ## [0.4.0] - 2025-04-06
 
 ### Added

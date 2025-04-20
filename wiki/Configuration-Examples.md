@@ -303,111 +303,59 @@ userPackages.utilities.bitwarden = {
 };
 ```
 
+## Tailscale VPN Configuration
+
+### Basic Tailscale Setup
+
+```nix
+userPackages.utilities.tailscale = {
+  enable = true;
+  # Using defaults for everything else
+};
+```
+
+### Tailscale with Auto-Connect and Agenix
+
+```nix
+# In your home.nix
+age = {
+  identityPaths = [ "/home/${userSettings.username}/.ssh/id_ed25519" ];
+  secrets = {
+    # Other secrets...
+    tailscale-auth-key = { file = ../../secrets/tailscale-auth-key.age; };
+  };
+};
+
+userPackages.utilities.tailscale = {
+  enable = true;
+  autoConnect = {
+    enable = true;
+    authKeyFile = config.age.secrets.tailscale-auth-key.path;
+  };
+  acceptRoutes = true;
+  waybar.enable = true;
+};
+```
+
+### Tailscale with Exit Node Setup
+
+```nix
+userPackages.utilities.tailscale = {
+  enable = true;
+  autoConnect = {
+    enable = true;
+    authKeyFile = config.age.secrets.tailscale-auth-key.path;
+  };
+  useExitNode = true;
+  exitNode = "exit-node-hostname"; # Replace with your exit node's hostname
+  acceptRoutes = true;
+  waybar.enable = true;
+};
+```
+
 ## Browser Configuration
 
 ### Basic Firefox Setup
-
-```nix
-userPackages.apps.browser = {
-  enable = true;
-  firefox.enable = true;
-};
-```
-
-### Privacy-Focused Firefox
-
-```nix
-userPackages.apps.browser.firefox = {
-  enable = true;
-  privacy = {
-    enable = true;
-    disableTelemetry = true;
-    disablePocket = true;
-    disableAccounts = true;
-    dnsOverHttps = {
-      enable = true;
-      providerUrl = "https://dns.nextdns.io/abc123"; # Custom DNS provider
-    };
-  };
-};
-```
-
-## Development Tools Configuration
-
-### Basic Development Setup
-
-```nix
-userPackages.development = {
-  enable = true;
-  nix.enable = true;
-  nodejs.enable = true;
-};
-```
-
-### Comprehensive Development Environment
-
-```nix
-userPackages.development = {
-  enable = true;
-  nix.enable = true;
-  markdown.enable = true;
-  nodejs.enable = true;
-  python.enable = true;
-  tooling.enable = true;
-  
-  github = {
-    enable = true;
-    enableCompletions = true;
-  };
-};
-
-userPackages.apps.development.git = {
-  enable = true;
-  userName = "Your Name";
-  userEmail = "your.email@example.com";
-  defaultBranch = "main";
-  enableCommitTemplate = true;
-  enableCommitHooks = true;
-};
-```
-
-## Editor Configuration
-
-### Basic Neovim Setup
-
-```nix
-userPackages.editors = {
-  enable = true;
-  neovim.enable = true;
-};
-```
-
-### Full-Featured Neovim IDE
-
-```nix
-userPackages.editors.neovim = {
-  enable = true;
-  plugins = {
-    enable = true;
-    lsp.enable = true;         # Language Server Protocol
-    git.enable = true;         # Git integration
-    markdown.enable = true;    # Markdown support
-  };
-};
-```
-
-## Terminal Configuration
-
-### Basic Terminal Setup
-
-```nix
-userPackages.apps.terminal = {
-  enable = true;
-  kitty.enable = true;
-};
-```
-
-### Customized Terminal
 
 ```nix
 userPackages.apps.terminal.kitty = {
@@ -521,6 +469,7 @@ userPackages = {
     screenshot.enable = true;
     clipboard.enable = true;
     bitwarden.enable = true;
+    tailscale.enable = true;  # Enable Tailscale VPN
   };
   
   apps = {
@@ -564,6 +513,14 @@ userPackages = {
     screenRecording.enable = true;
     clipboard.enable = true;
     wofi.enable = true;
+    tailscale = {
+      enable = true;
+      autoConnect = {
+        enable = true;
+        authKeyFile = config.age.secrets.tailscale-auth-key.path;
+      };
+      acceptRoutes = true;
+    };
   };
   
   development = {
@@ -602,4 +559,106 @@ userPackages = {
   
   fonts.enable = true;
 };
+```.browser = {
+  enable = true;
+  firefox.enable = true;
+};
 ```
+
+### Privacy-Focused Firefox
+
+```nix
+userPackages.apps.browser.firefox = {
+  enable = true;
+  privacy = {
+    enable = true;
+    disableTelemetry = true;
+    disablePocket = true;
+    disableAccounts = true;
+    dnsOverHttps = {
+      enable = true;
+      providerUrl = "https://dns.nextdns.io/abc123"; # Custom DNS provider
+    };
+  };
+};
+```
+
+## Development Tools Configuration
+
+### Basic Development Setup
+
+```nix
+userPackages.development = {
+  enable = true;
+  nix.enable = true;
+  nodejs.enable = true;
+};
+```
+
+### Comprehensive Development Environment
+
+```nix
+userPackages.development = {
+  enable = true;
+  nix.enable = true;
+  markdown.enable = true;
+  nodejs.enable = true;
+  python.enable = true;
+  tooling.enable = true;
+  
+  github = {
+    enable = true;
+    enableCompletions = true;
+  };
+};
+
+userPackages.apps.development.git = {
+  enable = true;
+  userName = "Your Name";
+  userEmail = "your.email@example.com";
+  defaultBranch = "main";
+  enableCommitTemplate = true;
+  enableCommitHooks = true;
+};
+```
+
+## Editor Configuration
+
+### Basic Neovim Setup
+
+```nix
+userPackages.editors = {
+  enable = true;
+  neovim.enable = true;
+};
+```
+
+### Full-Featured Neovim IDE
+
+```nix
+userPackages.editors.neovim = {
+  enable = true;
+  plugins = {
+    enable = true;
+    lsp.enable = true;         # Language Server Protocol
+    git.enable = true;         # Git integration
+    markdown.enable = true;    # Markdown support
+  };
+};
+```
+
+## Terminal Configuration
+
+### Basic Terminal Setup
+
+```nix
+userPackages.apps.terminal = {
+  enable = true;
+  kitty.enable = true;
+};
+```
+
+### Customized Terminal
+
+```nix
+userPackages.apps
