@@ -19,21 +19,6 @@ userPackages = {
       };
       waybar.enable = true;
     };
-    
-    # Enable peripherals management
-    peripherals = {
-      enable = true;
-      
-      # Enable Corsair device support for Harpoon mouse
-      corsair = {
-        enable = true;
-        autostart = true;
-      };
-      
-      # Optionally enable other device brands
-      logitech.enable = false;
-      razer.enable = false;
-    };
   };
   
   # Ensure Waybar is enabled for status indicators
