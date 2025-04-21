@@ -18,6 +18,7 @@ in {
     ./system-updates.nix
     ./disk-usage.nix
     ./tailscale.nix
+    ./bluetooth.nix
   ];
 
   options.userPackages.utilities = {

@@ -6,8 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 ### Added
 
+- Comprehensive Bluetooth device management with GUI and CLI tools
+- Waybar status indicator for Bluetooth connections
+- Bluetooth pairing and connection workflow
+- Bluetooth audio integration with PipeWire
+- Peripherals management for gaming devices
+- Support for Corsair Harpoon mouse LED control
+- LED color profiles and animation effects for RGB devices
+- Basic support for Logitech and Razer peripherals
+- Documentation for Bluetooth and peripherals management
 - Tailscale VPN integration with automatic connection
 - Agenix secret management for Tailscale auth key
 - Waybar status indicator for Tailscale
