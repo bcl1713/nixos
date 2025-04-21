@@ -62,6 +62,16 @@
 
     utilities = {
       enable = true;
+      bluetooth = {
+        enable = true;
+        autostart.enable = true;
+        audio.enable = true;
+        gui = {
+          enable = true;
+          blueman.enable = true;
+        };
+        waybar.enable = true;
+      };
       diskUsage = {
         enable = true;
         interactiveTools.enable = true;

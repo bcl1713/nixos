@@ -137,6 +137,17 @@
     nvidiaBusId = "PCI:2:0:0";
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+  };
+
   # === Sound Configuration ===
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
