@@ -24,6 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Waybar status indicator for Tailscale
 - Command-line utilities for managing Tailscale connection
 - Documentation for Tailscale configuration and usage
+- External drive management with automounting capabilities
+- GUI tools for drive operations (mounting, formatting, partitioning)
+- Safe drive unmounting and ejection workflow
+- Drive connection/removal notifications
+- Command-line utilities for managing external drives
+- Hyprland integration for quick drive management actions
 ## [0.4.0] - 2025-04-06
 
 ### Added
