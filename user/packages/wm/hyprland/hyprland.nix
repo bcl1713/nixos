@@ -147,6 +147,14 @@ in {
         key_press_enables_dpms = true;
       };
 
+      # Uncomment for debugging
+      # debug = {
+      #   overlay = true;
+      #   damage_tracking = 2;
+      #   disable_logs = false;
+      #   enable_stdout_logs = true;
+      # };
+
       # Input settings
       input = {
         kb_layout = "us";
