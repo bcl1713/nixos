@@ -6,7 +6,13 @@ with lib;
 
 let cfg = config.userPackages.scripts;
 in {
-  imports = [ ./wifi.nix ./battery.nix ./directory-combiner.nix ./output-generator.nix ];
+  imports = [
+    ./wifi.nix
+    ./battery.nix
+    ./directory-combiner.nix
+    ./output-generator.nix
+    ./keybinding-cheatsheet.nix
+  ];
 
   options.userPackages.scripts = {
     enable = mkOption {
@@ -58,6 +64,15 @@ in {
         description = "Whether to enable output file generator script";
       };
     };
+
+    keybindingCheatsheet = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Whether to enable keybinding cheatsheet generator";
+      };
+    };
+
   };
 
   config = mkIf cfg.enable {

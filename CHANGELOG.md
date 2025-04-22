@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Keybinding cheatsheet generator with multiple display formats
+- Command-line utility to show keyboard shortcuts
+- Integration with wofi/rofi for searchable keybinding reference
+- Documentation for keybinding cheatsheet feature
+- Automatic detection of system features for relevant shortcuts
 - Comprehensive Bluetooth device management with GUI and CLI tools
 - Waybar status indicator for Bluetooth connections
 - Bluetooth pairing and connection workflow
