@@ -62,6 +62,7 @@
 
     utilities = {
       enable = true;
+      externalDrives = { enable = true; };
       bluetooth = {
         enable = true;
         autostart.enable = true;

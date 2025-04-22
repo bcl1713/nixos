@@ -52,6 +52,9 @@
   # Enable gnome keyring
   services.gnome.gnome-keyring.enable = true;
 
+  # External Drive Support
+  services.udisks2.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
