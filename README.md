@@ -2,7 +2,7 @@
 
 A modular and extensible NixOS home-manager configuration with a focus on productivity, development, and customization.
 
-![Version](https://img.shields.io/badge/version-0.5.0-blue)
+![Version](https://img.shields.io/badge/version-0.6.0-blue)
 ![NixOS](https://img.shields.io/badge/NixOS-compatible-success)
 
 ## Overview
