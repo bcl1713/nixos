@@ -6,6 +6,48 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.4.0] - 2025-04-06
+
+### Added
+- Wiki for advanced topics and usage information
+- Configuration Basics
+- Comprehensive documentation for all configuration options
+- Configuration examples for common use cases
+- Disk usage analysis and management tools
+- Enhanced system update management with Home Manager integration
+- Unified update command for bot NixOS and Home Manager
+- Configurable update notifications system
+- Maintenance utilities including automatic garbage collection
+- Convenient shell aliases for system updates
+- Documentation for update system
+- System resource monitoring with CPU, memory, disk, and temperature metrics
+- Waybar integration for monitoring system resources with Nerd Font icons
+- Terminal-based monitoring tools (htop, btop, bottom)
+- Graphical monitoring tools (gnome-system-monitor, glances)
+- `system-stats` command for quick terminal-based system overview
+- Rofi application launcher with Catppuccin theme
+- Emoji picker integration with rofimoji
+- Cliboard manager with history support for Wayland using Clipman
+- Hyprland integration for clipbaord history via Super+V
+- GitHub CLI utility with aliases and shell completions
+- Output file generator script to combine directory contents and github issues
+- Emoji picker for wofi
+- Window picker for wofi
+- Screen recording functionality
+- Lid close suspend on battery and power, but not docked
+- Enhanced power management with profile switching and waybar integration
+- Bitwarden password manager integration with desktop app and CLI tools
+
+### Changed
+- Reorganized system update logic to work with existing system.autoUpgrade
+settings
+- Temporarily disabled wofi in favor of rofi until feature parody
+- Refactored scripts module by splitting output-generator into a separate file
+- Removed tools..nix and simplified scripts module structure
+- Improved modularity by moving script implementations to dedicated files
+- Migrated wofi to utilities
+
+### Fixed
 
 ## [0.5.0] - 2025-04-24
 

@@ -356,6 +356,112 @@ userPackages.utilities.tailscale = {
 ## Browser Configuration
 
 ### Basic Firefox Setup
+=======
+## Browser Configuration
+
+### Basic Firefox Setup
+
+```nix
+userPackages.apps.browser = {
+  enable = true;
+  firefox.enable = true;
+};
+```
+
+### Privacy-Focused Firefox
+
+```nix
+userPackages.apps.browser.firefox = {
+  enable = true;
+  privacy = {
+    enable = true;
+    disableTelemetry = true;
+    disablePocket = true;
+    disableAccounts = true;
+    dnsOverHttps = {
+      enable = true;
+      providerUrl = "https://dns.nextdns.io/abc123"; # Custom DNS provider
+    };
+  };
+};
+```
+
+## Development Tools Configuration
+
+### Basic Development Setup
+
+```nix
+userPackages.development = {
+  enable = true;
+  nix.enable = true;
+  nodejs.enable = true;
+};
+```
+
+### Comprehensive Development Environment
+
+```nix
+userPackages.development = {
+  enable = true;
+  nix.enable = true;
+  markdown.enable = true;
+  nodejs.enable = true;
+  python.enable = true;
+  tooling.enable = true;
+  
+  github = {
+    enable = true;
+    enableCompletions = true;
+  };
+};
+
+userPackages.apps.development.git = {
+  enable = true;
+  userName = "Your Name";
+  userEmail = "your.email@example.com";
+  defaultBranch = "main";
+  enableCommitTemplate = true;
+  enableCommitHooks = true;
+};
+```
+
+## Editor Configuration
+
+### Basic Neovim Setup
+
+```nix
+userPackages.editors = {
+  enable = true;
+  neovim.enable = true;
+};
+```
+
+### Full-Featured Neovim IDE
+
+```nix
+userPackages.editors.neovim = {
+  enable = true;
+  plugins = {
+    enable = true;
+    lsp.enable = true;         # Language Server Protocol
+    git.enable = true;         # Git integration
+    markdown.enable = true;    # Markdown support
+  };
+};
+```
+
+## Terminal Configuration
+
+### Basic Terminal Setup
+
+```nix
+userPackages.apps.terminal = {
+  enable = true;
+  kitty.enable = true;
+};
+```
+
+### Customized Terminal
 
 ```nix
 userPackages.apps.terminal.kitty = {
@@ -662,3 +768,4 @@ userPackages.apps.terminal = {
 
 ```nix
 userPackages.apps
+```

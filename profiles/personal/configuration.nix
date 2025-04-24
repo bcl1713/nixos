@@ -190,6 +190,8 @@
     libsecret
     inputs.agenix.packages.${pkgs.system}.default
 
+    inputs.agenix.packages.${pkgs.system}.default
+
     #GPU tools
     glxinfo
     vulkan-tools

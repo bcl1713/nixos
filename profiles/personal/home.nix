@@ -1,6 +1,8 @@
 # profiles/personal/home.nix
 
+
 { config, pkgs, userSettings, inputs, ... }:
+
 
 {
   home.username = userSettings.username;
@@ -12,20 +14,34 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+
   # Import custom modules defined in user/packages/
   # These modules use the standard NixOS module system (mkOption, mkIf)
   # to allow enabling/disabling groups of packages and configurations.
+
   imports = [ ../../user/packages inputs.agenix.homeManagerModules.default ];
 
   age = {
     identityPaths = [ "/home/${userSettings.username}/.ssh/id_ed25519" ];
     secrets = {
       personal-email = { file = ../../secrets/personal-email.age; };
+
       tailscale-auth-key = { file = ../../secrets/tailscale-auth-key.age; };
+
     };
   };
 
   userPackages = {
+    wm = {
+      enable = true;
+      hyprland = {
+        enable = true;
+        swaylock.enable = true;
+        swayidle.enable = true;
+      };
+      waybar.enable = true;
+    };
+
     wm = {
       enable = true;
       hyprland = {
@@ -59,7 +75,6 @@
       video.enable = true;
       image.enable = true;
     };
-
     utilities = {
       enable = true;
       externalDrives = { enable = true; };
