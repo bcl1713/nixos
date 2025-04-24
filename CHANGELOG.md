@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2025-04-24
+
 ### Added
 
 - Keybinding cheatsheet generator with multiple display formats
@@ -30,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Drive connection/removal notifications
 - Command-line utilities for managing external drives
 - Hyprland integration for quick drive management actions
+
 ## [0.4.0] - 2025-04-06
 
 ### Added
