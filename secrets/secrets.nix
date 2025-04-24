@@ -7,6 +7,7 @@ let
 
   allUsers = [ brianl nixbook ];
 in {
-  # Define your secrets here
   "personal-email.age".publicKeys = allUsers;
+  # Tailscale secrets
+  "tailscale-auth-key.age".publicKeys = allUsers;
 }

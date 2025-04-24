@@ -44,7 +44,7 @@ in {
       "$fileManager" = "nautilus";
       "$browser" = "firefox";
 
-      monitor = ",preferred,auto,1.6";
+      monitor = [ "eDP-1,preferred,auto,1.6" "DP-1,preferred,auto,1" ];
 
       # Autostart programs
       "exec-once" = [
@@ -146,6 +146,14 @@ in {
         disable_hyprland_logo = true;
         key_press_enables_dpms = true;
       };
+
+      # Uncomment for debugging
+      # debug = {
+      #   overlay = true;
+      #   damage_tracking = 2;
+      #   disable_logs = false;
+      #   enable_stdout_logs = true;
+      # };
 
       # Input settings
       input = {

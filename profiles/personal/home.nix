@@ -1,15 +1,23 @@
 # profiles/personal/home.nix
 
-{ pkgs, userSettings, inputs, ... }:
+
+{ config, pkgs, userSettings, inputs, ... }:
+
 
 {
   home.username = userSettings.username;
   home.homeDirectory = "/home/" + userSettings.username;
 
+  # Allow installation of unfree packages via Home Manager.
   nixpkgs.config.allowUnfree = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+
+  # Import custom modules defined in user/packages/
+  # These modules use the standard NixOS module system (mkOption, mkIf)
+  # to allow enabling/disabling groups of packages and configurations.
 
   imports = [ ../../user/packages inputs.agenix.homeManagerModules.default ];
 
@@ -17,10 +25,22 @@
     identityPaths = [ "/home/${userSettings.username}/.ssh/id_ed25519" ];
     secrets = {
       personal-email = { file = ../../secrets/personal-email.age; };
+
+      tailscale-auth-key = { file = ../../secrets/tailscale-auth-key.age; };
+
     };
   };
 
   userPackages = {
+    wm = {
+      enable = true;
+      hyprland = {
+        enable = true;
+        swaylock.enable = true;
+        swayidle.enable = true;
+      };
+      waybar.enable = true;
+    };
 
     wm = {
       enable = true;
@@ -55,9 +75,19 @@
       video.enable = true;
       image.enable = true;
     };
-
     utilities = {
       enable = true;
+      externalDrives = { enable = true; };
+      bluetooth = {
+        enable = true;
+        autostart.enable = true;
+        audio.enable = true;
+        gui = {
+          enable = true;
+          blueman.enable = true;
+        };
+        waybar.enable = true;
+      };
       diskUsage = {
         enable = true;
         interactiveTools.enable = true;
@@ -87,6 +117,15 @@
       rofi.enable = false;
       screenshot.enable = true;
       bitwarden.enable = true;
+      tailscale = {
+        enable = true;
+        autoConnect = {
+          enable = true;
+          authKeyFile = config.age.secrets.tailscale-auth-key.path;
+        };
+        acceptRoutes = true;
+        waybar.enable = true;
+      };
       systemUpdates = {
         enable = true;
         homeManager = { enable = true; };
@@ -159,6 +198,8 @@
       theme = "agnoster";
     };
     plugins = [
+      # Fetch Zsh plugins directly from GitHub using specific revisions.
+      # Consider using flake inputs for these if stable versions are available.
       {
         name = "zsh-autosuggestions";
         src = pkgs.fetchFromGitHub {
@@ -179,5 +220,4 @@
       }
     ];
   };
-
 }

@@ -10,6 +10,12 @@
         group = "users";
         mode = "0400";
       };
+      tailscale-auth-key = {
+        file = ../../secrets/tailscale-auth-key.age;
+        owner = "brianl";
+        group = "users";
+        mode = "0400";
+      };
     };
   };
 }

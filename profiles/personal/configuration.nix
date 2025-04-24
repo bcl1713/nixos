@@ -8,10 +8,11 @@
     ./secrets.nix
   ];
 
-  # NVIDIA modules
+  # Ensure NVIDIA kernel modules are loaded and Nouveau is blacklisted.
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   boot.blacklistedKernelModules = [ "nouveau" ];
   boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  # Enable Kernel Mode Setting for smoother boot and TTY.
   boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
   # Bootloader.
@@ -51,6 +52,9 @@
   # Enable gnome keyring
   services.gnome.gnome-keyring.enable = true;
 
+  # External Drive Support
+  services.udisks2.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -74,6 +78,13 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
     };
+  };
+
+  # Tailscale VPN
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+    useRoutingFeatures = "client";
   };
 
   xdg.portal = {
@@ -104,27 +115,43 @@
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
 
-  # Enable and configure NVIDIA drivers
+  # Enable and configure NVIDIA proprietary drivers using NixOS hardware module.
   hardware.nvidia = {
     modesetting.enable = true;
+    # Power management features like Runtime D3 (RTD3).
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
-    open = false;
-    nvidiaSettings = true;
+    powerManagement.finegrained = true; # Allow more power saving states.
+    open = false; # Use proprietary kernel module, not the open-source one.
+    nvidiaSettings = true; # Install nvidia-settings tool.
+    # Use the stable NVIDIA driver package provided by the current kernel.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # GPU switching configuration
+  # Configure NVIDIA PRIME for GPU offloading on Optimus laptops.
   hardware.nvidia.prime = {
+    # Enable render offload mode.
     offload = {
       enable = true;
-      enableOffloadCmd = true;
+      enableOffloadCmd = true; # Provides the `nvidia-offload` command wrapper.
     };
-    # Bus ID values can be found using `lspci`
+    # Explicitly set PCI bus IDs for Intel and NVIDIA GPUs.
+    # Find these using `lspci | grep -E 'VGA|3D'`.
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:2:0:0";
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+  };
+
+  # === Sound Configuration ===
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -135,7 +162,7 @@
     pulse.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.brianl = {
     isNormalUser = true;
     description = "Brian Lucas";
@@ -143,7 +170,7 @@
     shell = pkgs.zsh;
   };
 
-  # Allow unfree packages
+  # Allow installation of unfree packages system-wide.
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile.
@@ -152,8 +179,16 @@
     wget
     git
     nautilus
+
+    # PKI
+    opensc
+    pcsclite
+    pcsctools
+
+    # Secrets Management
     gnome-keyring
     libsecret
+    inputs.agenix.packages.${pkgs.system}.default
 
     inputs.agenix.packages.${pkgs.system}.default
 
@@ -164,6 +199,9 @@
     nvtopPackages.full
     intel-gpu-tools
 
+    # Tailscale
+    tailscale
+
     (writeShellScriptBin "nvidia-offload" ''
       export __NV_PRIME_RENDER_OFFLOAD=1
       export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
@@ -173,6 +211,9 @@
     '')
   ];
 
+  # Enable Zsh globally. While user shell preference is set in home-manager,
+  # enabling it here ensures the package is available system-wide if needed
+  # and sets it as the default shell for the user defined below.
   programs.zsh.enable = true;
 
   fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
@@ -190,6 +231,7 @@
       STOP_CHARGE_THRESH_BAT0 = 90;
     };
   };
+  services.pcscd.enable = true;
 
   # Automatic security updates
   system.autoUpgrade = {
@@ -200,7 +242,7 @@
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
